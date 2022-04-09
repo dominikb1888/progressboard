@@ -4,31 +4,13 @@ import pandas as pd
 import seaborn as sns
 import re
 
-gh = Github("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")
 
-
-def check_local(repo):
-    for local_repo in pd.read_csv("leaderboard.csv"):
-        if local_repo["updated"]:
-            updated_local = local_repo["updated"]
-        if repo["updated_at"] > updated_local:
-            return False
-    return True
-
-
-def get_table():
-    table = []
-    for repo in gh.get_organization("DB-Teaching").get_repos():
-        if check_local(repo):
-            continue
-
-        splitlist = re.split("-|_", repo.name, maxsplit=2)
-        session, exercise, *rest = (
-            splitlist if len(splitlist) > 1 else (splitlist, 0, 0)
-        )
+class Leaderboard():
+    def __init__(org=DB-Teaching, key="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", self):
+        self.gh = Github(key)
         runs = repo.get_workflow_runs()
-        table.append(
-            {
+        session, exercise = self._split_repo_name()
+        self.columns = {
                 "session": session,
                 "exercise": exercise,
                 "name": repo.name,
@@ -40,12 +22,28 @@ def get_table():
                 "failed": sum([1 for w in runs if w.conclusion != "failure"]),
                 "updated_at": repo["updated_at"],
             }
-        )
-        print(repo.name)
-    df = pd.DataFrame(table)
-    df.to_csv("leaderboard.csv")
+        self.repos = self.gh.get_organization(self.org).get_repos()
+        self.users = list(set([user.login for user in gh.get_organization("DB-Teaching").get_outside_collaborators()] + ["yllkaninaj"]))
+        self.dataframe = self._get_table()
+        self.to_csv = self._get_table.to_csv("leaderboard.csv")
 
-    return df
+
+def _check_update(self):
+    for local_repo in pd.read_csv("leaderboard.csv"):
+        if local_repo["updated"]:
+            updated_local = local_repo["updated"]
+        if repo["updated_at"] > updated_local:
+            return False
+    return True
+
+
+def _split_repo_name(self):
+    for repos in self.repo:
+       splitlist = re.split("-|_", repo.name, maxsplit=2)
+       session, exercise, *rest = (
+            splitlist if len(splitlist) > 1 else (splitlist, 0, 0)
+        )
+    return session, exercise
 
 
 def prepare_table(update=False):
