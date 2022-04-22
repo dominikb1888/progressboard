@@ -1,0 +1,275 @@
+,session,exercise,name,user,url,commits,runs,completed,completed_at,failed
+0,['python'],0,python,python,https://api.github.com/repos/DB-Teaching/python,2990,0,0,[],0
+1,github,starter,github-starter-course,course,https://api.github.com/repos/DB-Teaching/github-starter-course,1,0,0,[],0
+2,01,04,01-04_grains,04_grains,https://api.github.com/repos/DB-Teaching/01-04_grains,1,0,0,[],0
+3,01,05,01-05_pangram,05_pangram,https://api.github.com/repos/DB-Teaching/01-05_pangram,2,0,0,[],0
+4,01,01,01-01_hello-world,world,https://api.github.com/repos/DB-Teaching/01-01_hello-world,1,0,0,[],0
+5,01,02,01-02_leap,02_leap,https://api.github.com/repos/DB-Teaching/01-02_leap,1,0,0,[],0
+6,01,03,01-03_difference-of-squares,squares,https://api.github.com/repos/DB-Teaching/01-03_difference-of-squares,1,0,0,[],0
+7,01,03,01-03_gigasecond,03_gigasecond,https://api.github.com/repos/DB-Teaching/01-03_gigasecond,1,0,0,[],0
+8,01,06,01-06_two-fer,fer,https://api.github.com/repos/DB-Teaching/01-06_two-fer,1,0,0,[],0
+9,01,07,01-07_collatz-conjecture,conjecture,https://api.github.com/repos/DB-Teaching/01-07_collatz-conjecture,1,0,0,[],0
+10,01,08,01-08_bob,08_bob,https://api.github.com/repos/DB-Teaching/01-08_bob,1,0,0,[],0
+11,02,01,02-01_queen-attack,attack,https://api.github.com/repos/DB-Teaching/02-01_queen-attack,2,1,0,[],1
+12,02,02,02-02_triangle,02_triangle,https://api.github.com/repos/DB-Teaching/02-02_triangle,1,0,0,[],0
+13,02,03,02-03_perfect-numbers,numbers,https://api.github.com/repos/DB-Teaching/02-03_perfect-numbers,1,0,0,[],0
+14,02,04,02-04_sublist,04_sublist,https://api.github.com/repos/DB-Teaching/02-04_sublist,1,0,0,[],0
+15,02,05,02-05_diamond,05_diamond,https://api.github.com/repos/DB-Teaching/02-05_diamond,1,0,0,[],0
+16,02,06,02-06_yacht,06_yacht,https://api.github.com/repos/DB-Teaching/02-06_yacht,1,0,0,[],0
+17,02,07,02-07_pythagorean-triplet,triplet,https://api.github.com/repos/DB-Teaching/02-07_pythagorean-triplet,2,0,0,[],0
+18,02,08,02-08_matching-brackets,brackets,https://api.github.com/repos/DB-Teaching/02-08_matching-brackets,1,0,0,[],0
+19,02,09,02-09_binary-search,search,https://api.github.com/repos/DB-Teaching/02-09_binary-search,1,0,0,[],0
+20,02,10,02-10_reverse-string,string,https://api.github.com/repos/DB-Teaching/02-10_reverse-string,1,0,0,[],0
+21,02,11,02-11_isbn-verifier,verifier,https://api.github.com/repos/DB-Teaching/02-11_isbn-verifier,1,0,0,[],0
+22,02,12,02-12_rna-transcription,transcription,https://api.github.com/repos/DB-Teaching/02-12_rna-transcription,1,0,0,[],0
+23,02,13,02-13_pig-latin,latin,https://api.github.com/repos/DB-Teaching/02-13_pig-latin,1,0,0,[],0
+24,02,14,02-14_darts,14_darts,https://api.github.com/repos/DB-Teaching/02-14_darts,1,0,0,[],0
+25,03,01,03-01_phone-number,number,https://api.github.com/repos/DB-Teaching/03-01_phone-number,1,0,0,[],0
+26,03,02,03-02_armstrong-numbers,numbers,https://api.github.com/repos/DB-Teaching/03-02_armstrong-numbers,1,0,0,[],0
+27,03,03,03-03_nth-prime,prime,https://api.github.com/repos/DB-Teaching/03-03_nth-prime,1,0,0,[],0
+28,03,04,03-04_sum-of-multiples,multiples,https://api.github.com/repos/DB-Teaching/03-04_sum-of-multiples,1,0,0,[],0
+29,03,05,03-05_prime-factors,factors,https://api.github.com/repos/DB-Teaching/03-05_prime-factors,1,0,0,[],0
+30,03,06,03-06_beer-song,song,https://api.github.com/repos/DB-Teaching/03-06_beer-song,1,0,0,[],0
+31,03,07,03-07_flatten-array,array,https://api.github.com/repos/DB-Teaching/03-07_flatten-array,1,0,0,[],0
+32,03,08,03-08_atbash-cipher,cipher,https://api.github.com/repos/DB-Teaching/03-08_atbash-cipher,1,0,0,[],0
+33,03,09,03-09_series,09_series,https://api.github.com/repos/DB-Teaching/03-09_series,1,0,0,[],0
+34,03,10,03-10_anagram,10_anagram,https://api.github.com/repos/DB-Teaching/03-10_anagram,1,0,0,[],0
+35,01,09,01-09_resistor-color,color,https://api.github.com/repos/DB-Teaching/01-09_resistor-color,1,0,0,[],0
+36,03,12,03-12_list-ops,ops,https://api.github.com/repos/DB-Teaching/03-12_list-ops,1,0,0,[],0
+37,03,13,03-13_house,13_house,https://api.github.com/repos/DB-Teaching/03-13_house,1,0,0,[],0
+38,01,10,01-10_resistor-color-duo,duo,https://api.github.com/repos/DB-Teaching/01-10_resistor-color-duo,1,0,0,[],0
+39,01,11,01-11_high-scores,scores,https://api.github.com/repos/DB-Teaching/01-11_high-scores,1,0,0,[],0
+40,04,01,04-01_etl,01_etl,https://api.github.com/repos/DB-Teaching/04-01_etl,1,0,0,[],0
+41,04,02,04-02_say,02_say,https://api.github.com/repos/DB-Teaching/04-02_say,1,0,0,[],0
+42,04,03,04-03_wordy,03_wordy,https://api.github.com/repos/DB-Teaching/04-03_wordy,1,0,0,[],0
+43,04,04,04-04_crypto-square,square,https://api.github.com/repos/DB-Teaching/04-04_crypto-square,1,0,0,[],0
+44,04,04,04-04_hamming,04_hamming,https://api.github.com/repos/DB-Teaching/04-04_hamming,1,0,0,[],0
+45,04,05,04-05_matrix,05_matrix,https://api.github.com/repos/DB-Teaching/04-05_matrix,1,0,0,[],0
+46,04,06,04-06_minesweeper,06_minesweeper,https://api.github.com/repos/DB-Teaching/04-06_minesweeper,1,0,0,[],0
+47,04,07,04-07_palindrome-products,products,https://api.github.com/repos/DB-Teaching/04-07_palindrome-products,1,0,0,[],0
+48,04,08,04-08_raindrops,08_raindrops,https://api.github.com/repos/DB-Teaching/04-08_raindrops,1,0,0,[],0
+49,04,09,04-09_robot-name,name,https://api.github.com/repos/DB-Teaching/04-09_robot-name,1,0,0,[],0
+50,05,01,05-01_robot-simulator,simulator,https://api.github.com/repos/DB-Teaching/05-01_robot-simulator,1,0,0,[],0
+51,05,02,05-02_roman-numerals,numerals,https://api.github.com/repos/DB-Teaching/05-02_roman-numerals,1,0,0,[],0
+52,05,03,05-03_rotational-cipher,cipher,https://api.github.com/repos/DB-Teaching/05-03_rotational-cipher,1,0,0,[],0
+53,05,04,05-04_run-length-encoding,encoding,https://api.github.com/repos/DB-Teaching/05-04_run-length-encoding,1,0,0,[],0
+54,05,05,05-05_secret-handshake,handshake,https://api.github.com/repos/DB-Teaching/05-05_secret-handshake,1,0,0,[],0
+55,05,06,05-06_sieve,06_sieve,https://api.github.com/repos/DB-Teaching/05-06_sieve,1,0,0,[],0
+56,05,07,05-07_space-age,age,https://api.github.com/repos/DB-Teaching/05-07_space-age,1,0,0,[],0
+57,05,08,05-08_spiral-matrix,matrix,https://api.github.com/repos/DB-Teaching/05-08_spiral-matrix,1,0,0,[],0
+58,05,09,05-09_transpose,09_transpose,https://api.github.com/repos/DB-Teaching/05-09_transpose,1,0,0,[],0
+59,07,01,07-01_meetup,01_meetup,https://api.github.com/repos/DB-Teaching/07-01_meetup,1,0,0,[],0
+60,07,02,07-02_dnd-character,character,https://api.github.com/repos/DB-Teaching/07-02_dnd-character,1,0,0,[],0
+61,07,03,07-03_simple-linked-list,list,https://api.github.com/repos/DB-Teaching/07-03_simple-linked-list,1,0,0,[],0
+62,07,04,07-04_scale-generator,generator,https://api.github.com/repos/DB-Teaching/07-04_scale-generator,1,0,0,[],0
+63,07,05,07-05_go-counting,counting,https://api.github.com/repos/DB-Teaching/07-05_go-counting,1,0,0,[],0
+64,07,06,07-06_luhn,06_luhn,https://api.github.com/repos/DB-Teaching/07-06_luhn,1,0,0,[],0
+65,07,07,07-07_clock,07_clock,https://api.github.com/repos/DB-Teaching/07-07_clock,1,0,0,[],0
+66,07,08,07-08_complex-numbers,numbers,https://api.github.com/repos/DB-Teaching/07-08_complex-numbers,1,0,0,[],0
+67,07,09,07-09_allergies,09_allergies,https://api.github.com/repos/DB-Teaching/07-09_allergies,1,0,0,[],0
+68,07,10,07-10_linked-list,list,https://api.github.com/repos/DB-Teaching/07-10_linked-list,1,0,0,[],0
+69,07,11,07-11_kindergarten-garden,garden,https://api.github.com/repos/DB-Teaching/07-11_kindergarten-garden,1,0,0,[],0
+70,07,12,07-12_connect,12_connect,https://api.github.com/repos/DB-Teaching/07-12_connect,1,0,0,[],0
+71,07,13,07-13_simple-cipher,cipher,https://api.github.com/repos/DB-Teaching/07-13_simple-cipher,1,0,0,[],0
+72,07,14,07-14_tree-building,building,https://api.github.com/repos/DB-Teaching/07-14_tree-building,1,0,0,[],0
+73,07,15,07-15_grade-school,school,https://api.github.com/repos/DB-Teaching/07-15_grade-school,1,0,0,[],0
+74,07,16,07-16_circular-buffer,buffer,https://api.github.com/repos/DB-Teaching/07-16_circular-buffer,1,0,0,[],0
+75,08,01,08-01_grep,01_grep,https://api.github.com/repos/DB-Teaching/08-01_grep,1,0,0,[],0
+76,08,02,08-02_poker,02_poker,https://api.github.com/repos/DB-Teaching/08-02_poker,1,0,0,[],0
+77,08,03,08-03_rectangles,03_rectangles,https://api.github.com/repos/DB-Teaching/08-03_rectangles,1,0,0,[],0
+78,08,04,08-04_change,04_change,https://api.github.com/repos/DB-Teaching/08-04_change,1,0,0,[],0
+79,08,05,08-05_all-your-base,base,https://api.github.com/repos/DB-Teaching/08-05_all-your-base,1,0,0,[],0
+80,08,06,08-06_diffie-hellman,hellman,https://api.github.com/repos/DB-Teaching/08-06_diffie-hellman,1,0,0,[],0
+81,08,07,08-07_variable-length-quantity,quantity,https://api.github.com/repos/DB-Teaching/08-07_variable-length-quantity,1,0,0,[],0
+82,08,08,08-08_largest-series-product,product,https://api.github.com/repos/DB-Teaching/08-08_largest-series-product,1,0,0,[],0
+83,08,09,08-09_ocr-numbers,numbers,https://api.github.com/repos/DB-Teaching/08-09_ocr-numbers,1,0,0,[],0
+84,08,10,08-10_rail-fence-cipher,cipher,https://api.github.com/repos/DB-Teaching/08-10_rail-fence-cipher,1,0,0,[],0
+85,08,11,08-11_food-chain,chain,https://api.github.com/repos/DB-Teaching/08-11_food-chain,1,0,0,[],0
+86,08,12,08-12_saddle-points,points,https://api.github.com/repos/DB-Teaching/08-12_saddle-points,1,0,0,[],0
+87,08,13,08-13_protein-translation,translation,https://api.github.com/repos/DB-Teaching/08-13_protein-translation,1,0,0,[],0
+88,08,14,08-14_acronym,14_acronym,https://api.github.com/repos/DB-Teaching/08-14_acronym,1,0,0,[],0
+89,08,15,08-15_scrabble-score,score,https://api.github.com/repos/DB-Teaching/08-15_scrabble-score,1,0,0,[],0
+90,08,16,08-16_markdown,16_markdown,https://api.github.com/repos/DB-Teaching/08-16_markdown,1,0,0,[],0
+91,08,17,08-17_isogram,17_isogram,https://api.github.com/repos/DB-Teaching/08-17_isogram,1,0,0,[],0
+92,08,18,08-18_word-count,count,https://api.github.com/repos/DB-Teaching/08-18_word-count,1,0,0,[],0
+93,09,01,09-01_affine-cipher,cipher,https://api.github.com/repos/DB-Teaching/09-01_affine-cipher,1,0,0,[],0
+94,09,02,09-02_binary-search-tree,tree,https://api.github.com/repos/DB-Teaching/09-02_binary-search-tree,1,0,0,[],0
+95,09,03,09-03_book-store,store,https://api.github.com/repos/DB-Teaching/09-03_book-store,1,0,0,[],0
+96,09,04,09-04_bowling,04_bowling,https://api.github.com/repos/DB-Teaching/09-04_bowling,1,0,0,[],0
+97,09,05,09-05_custom-set,set,https://api.github.com/repos/DB-Teaching/09-05_custom-set,1,0,0,[],0
+98,09,06,09-06_dot-dsl,dsl,https://api.github.com/repos/DB-Teaching/09-06_dot-dsl,1,0,0,[],0
+99,09,07,09-07_forth,07_forth,https://api.github.com/repos/DB-Teaching/09-07_forth,1,0,0,[],0
+100,09,08,09-08_hangman,08_hangman,https://api.github.com/repos/DB-Teaching/09-08_hangman,1,0,0,[],0
+101,09,09,09-09_knapsack,09_knapsack,https://api.github.com/repos/DB-Teaching/09-09_knapsack,1,0,0,[],0
+102,10,01,10-01_ledger,01_ledger,https://api.github.com/repos/DB-Teaching/10-01_ledger,1,0,0,[],0
+103,10,02,10-02_rational-numbers,numbers,https://api.github.com/repos/DB-Teaching/10-02_rational-numbers,1,0,0,[],0
+104,10,03,10-03_tournament,03_tournament,https://api.github.com/repos/DB-Teaching/10-03_tournament,1,0,0,[],0
+105,10,04,10-04_twelve-days,days,https://api.github.com/repos/DB-Teaching/10-04_twelve-days,1,0,0,[],0
+106,10,05,10-05_two-bucket,bucket,https://api.github.com/repos/DB-Teaching/10-05_two-bucket,1,0,0,[],0
+107,10,06,10-06_zebra-puzzle,puzzle,https://api.github.com/repos/DB-Teaching/10-06_zebra-puzzle,1,0,0,[],0
+108,10,07,10-07_alphametics,07_alphametics,https://api.github.com/repos/DB-Teaching/10-07_alphametics,1,0,0,[],0
+109,10,08,10-08_react,08_react,https://api.github.com/repos/DB-Teaching/10-08_react,1,0,0,[],0
+110,11,01,11-01_word-search,search,https://api.github.com/repos/DB-Teaching/11-01_word-search,1,0,0,[],0
+111,11,02,11-02_zipper,02_zipper,https://api.github.com/repos/DB-Teaching/11-02_zipper,1,0,0,[],0
+112,11,03,11-03_dominoes,03_dominoes,https://api.github.com/repos/DB-Teaching/11-03_dominoes,1,0,0,[],0
+113,12,01,12-01_paasio,01_paasio,https://api.github.com/repos/DB-Teaching/12-01_paasio,1,0,0,[],0
+114,12,02,12-02_satellite,02_satellite,https://api.github.com/repos/DB-Teaching/12-02_satellite,1,0,0,[],0
+115,12,03,12-03_sgf-parsing,parsing,https://api.github.com/repos/DB-Teaching/12-03_sgf-parsing,1,0,0,[],0
+116,13,01,13-01_bank-account,account,https://api.github.com/repos/DB-Teaching/13-01_bank-account,1,0,0,[],0
+117,14,01,14-01_pov,01_pov,https://api.github.com/repos/DB-Teaching/14-01_pov,1,0,0,[],0
+118,15,01,15-01_rest-api,api,https://api.github.com/repos/DB-Teaching/15-01_rest-api,1,0,0,[],0
+119,01,01,01-01-hello-world-dominikb1888,dominikb1888,https://api.github.com/repos/DB-Teaching/01-01-hello-world-dominikb1888,2,6,4,"[datetime.datetime(2022, 3, 15, 8, 57, 1), datetime.datetime(2022, 3, 15, 8, 57, 2), datetime.datetime(2022, 3, 15, 8, 58, 17), datetime.datetime(2022, 3, 15, 9, 47, 25)]",2
+120,01,02,01-02-leap-dominikb1888,dominikb1888,https://api.github.com/repos/DB-Teaching/01-02-leap-dominikb1888,3,1,0,[],1
+121,10,06,10-06-zebra-puzzle-dominikb1888,dominikb1888,https://api.github.com/repos/DB-Teaching/10-06-zebra-puzzle-dominikb1888,3,1,0,[],1
+122,01,03,01-03-difference-of-squares-dominikb1888,dominikb1888,https://api.github.com/repos/DB-Teaching/01-03-difference-of-squares-dominikb1888,4,2,0,[],2
+123,01,03,01-03-gigasecond-dominikb1888,dominikb1888,https://api.github.com/repos/DB-Teaching/01-03-gigasecond-dominikb1888,3,1,0,[],1
+124,01,04,01-04-grains-dominikb1888,dominikb1888,https://api.github.com/repos/DB-Teaching/01-04-grains-dominikb1888,3,1,0,[],1
+125,01,05,01-05-pangram-dominikb1888,dominikb1888,https://api.github.com/repos/DB-Teaching/01-05-pangram-dominikb1888,3,1,0,[],1
+126,01,06,01-06-two-fer-dominikb1888,dominikb1888,https://api.github.com/repos/DB-Teaching/01-06-two-fer-dominikb1888,3,1,0,[],1
+127,01,07,01-07-collatz-conjecture-dominikb1888,dominikb1888,https://api.github.com/repos/DB-Teaching/01-07-collatz-conjecture-dominikb1888,3,1,0,[],1
+128,01,08,01-08-bob-dominikb1888,dominikb1888,https://api.github.com/repos/DB-Teaching/01-08-bob-dominikb1888,3,1,0,[],1
+129,01,01,01-01-hello-world-michelleschmidt,michelleschmidt,https://api.github.com/repos/DB-Teaching/01-01-hello-world-michelleschmidt,4,2,1,"[datetime.datetime(2022, 3, 16, 8, 51, 36)]",1
+130,01,01,01-01-hello-world-cleverjohnson,cleverjohnson,https://api.github.com/repos/DB-Teaching/01-01-hello-world-cleverjohnson,5,2,1,"[datetime.datetime(2022, 3, 17, 10, 11, 51)]",1
+131,01,01,01-01-hello-world-ShahrimaAkter,ShahrimaAkter,https://api.github.com/repos/DB-Teaching/01-01-hello-world-ShahrimaAkter,3,1,0,[],1
+132,01,01,01-01-hello-world-Tanmaytc25,Tanmaytc25,https://api.github.com/repos/DB-Teaching/01-01-hello-world-Tanmaytc25,3,1,0,[],1
+133,01,01,01-01-hello-world-joeniho,joeniho,https://api.github.com/repos/DB-Teaching/01-01-hello-world-joeniho,4,2,0,[],2
+134,01,01,01-01-hello-world-chloe-1111,1111,https://api.github.com/repos/DB-Teaching/01-01-hello-world-chloe-1111,4,2,1,"[datetime.datetime(2022, 3, 22, 20, 21, 2)]",1
+135,01,01,01-01-hello-world-OliviaA22,OliviaA22,https://api.github.com/repos/DB-Teaching/01-01-hello-world-OliviaA22,4,2,1,"[datetime.datetime(2022, 3, 16, 9, 35, 18)]",1
+136,01,01,01-01-hello-world-yadwinder1905,yadwinder1905,https://api.github.com/repos/DB-Teaching/01-01-hello-world-yadwinder1905,14,12,0,[],12
+137,01,01,01-01-hello-world-Ucybrown,Ucybrown,https://api.github.com/repos/DB-Teaching/01-01-hello-world-Ucybrown,3,1,0,[],1
+138,01,01,01-01-hello-world-ChiomasCorner,ChiomasCorner,https://api.github.com/repos/DB-Teaching/01-01-hello-world-ChiomasCorner,3,1,0,[],1
+139,01,01,01-01-hello-world-ShoikatSajib,ShoikatSajib,https://api.github.com/repos/DB-Teaching/01-01-hello-world-ShoikatSajib,3,1,0,[],1
+140,01,01,01-01-hello-world-Sinatun-Sadik,Sadik,https://api.github.com/repos/DB-Teaching/01-01-hello-world-Sinatun-Sadik,3,1,0,[],1
+141,01,01,01-01-hello-world-yllkaninaj,yllkaninaj,https://api.github.com/repos/DB-Teaching/01-01-hello-world-yllkaninaj,3,1,0,[],1
+142,01,01,01-01-hello-world-staycliz,staycliz,https://api.github.com/repos/DB-Teaching/01-01-hello-world-staycliz,4,2,1,"[datetime.datetime(2022, 4, 6, 7, 44, 21)]",1
+143,01,02,01-02-leap-chloe-1111,1111,https://api.github.com/repos/DB-Teaching/01-02-leap-chloe-1111,4,2,1,"[datetime.datetime(2022, 3, 22, 20, 45, 4)]",1
+144,01,02,01-02-leap-michelleschmidt,michelleschmidt,https://api.github.com/repos/DB-Teaching/01-02-leap-michelleschmidt,6,4,2,"[datetime.datetime(2022, 3, 16, 10, 10, 49), datetime.datetime(2022, 3, 22, 20, 45, 3)]",2
+145,01,02,01-02-leap-yadwinder1905,yadwinder1905,https://api.github.com/repos/DB-Teaching/01-02-leap-yadwinder1905,3,1,0,[],1
+146,01,02,01-02-leap-OliviaA22,OliviaA22,https://api.github.com/repos/DB-Teaching/01-02-leap-OliviaA22,5,3,2,"[datetime.datetime(2022, 3, 16, 10, 11, 40), datetime.datetime(2022, 3, 16, 21, 51, 42)]",1
+147,01,02,01-02-leap-joeniho,joeniho,https://api.github.com/repos/DB-Teaching/01-02-leap-joeniho,3,1,0,[],1
+148,01,03,01-03-difference-of-squares-OliviaA22,OliviaA22,https://api.github.com/repos/DB-Teaching/01-03-difference-of-squares-OliviaA22,5,3,2,"[datetime.datetime(2022, 3, 16, 18, 37), datetime.datetime(2022, 4, 3, 11, 40, 12)]",1
+149,01,03,01-03-gigasecond-OliviaA22,OliviaA22,https://api.github.com/repos/DB-Teaching/01-03-gigasecond-OliviaA22,4,2,1,"[datetime.datetime(2022, 3, 16, 21, 40, 46)]",1
+150,02,01,02-01-queen-attack-dominikb1888,dominikb1888,https://api.github.com/repos/DB-Teaching/02-01-queen-attack-dominikb1888,4,2,0,[],2
+151,02,02,02-02-triangle-dominikb1888,dominikb1888,https://api.github.com/repos/DB-Teaching/02-02-triangle-dominikb1888,4,2,0,[],2
+152,01,08,01-08-bob-cleverjohnson,cleverjohnson,https://api.github.com/repos/DB-Teaching/01-08-bob-cleverjohnson,4,2,1,"[datetime.datetime(2022, 3, 19, 9, 46, 55)]",1
+153,01,02,01-02-leap-cleverjohnson,cleverjohnson,https://api.github.com/repos/DB-Teaching/01-02-leap-cleverjohnson,4,2,1,"[datetime.datetime(2022, 3, 17, 16, 58, 28)]",1
+154,01,04,01-04-grains-OliviaA22,OliviaA22,https://api.github.com/repos/DB-Teaching/01-04-grains-OliviaA22,4,2,1,"[datetime.datetime(2022, 3, 18, 20, 31, 34)]",1
+155,01,03,01-03-difference-of-squares-cleverjohnson,cleverjohnson,https://api.github.com/repos/DB-Teaching/01-03-difference-of-squares-cleverjohnson,5,3,1,"[datetime.datetime(2022, 3, 19, 9, 16, 33)]",2
+156,02,05,02-05-diamond-dominikb1888,dominikb1888,https://api.github.com/repos/DB-Teaching/02-05-diamond-dominikb1888,4,2,1,"[datetime.datetime(2022, 3, 19, 6, 34, 4)]",1
+157,02,06,02-06-yacht-dominikb1888,dominikb1888,https://api.github.com/repos/DB-Teaching/02-06-yacht-dominikb1888,4,2,1,"[datetime.datetime(2022, 3, 19, 6, 34, 22)]",1
+158,01,05,01-05-pangram-OliviaA22,OliviaA22,https://api.github.com/repos/DB-Teaching/01-05-pangram-OliviaA22,4,2,1,"[datetime.datetime(2022, 3, 21, 14, 7, 54)]",1
+159,02,08,02-08-matching-brackets-dominikb1888,dominikb1888,https://api.github.com/repos/DB-Teaching/02-08-matching-brackets-dominikb1888,4,2,1,"[datetime.datetime(2022, 3, 19, 6, 34, 42)]",1
+160,01,03,01-03-gigasecond-cleverjohnson,cleverjohnson,https://api.github.com/repos/DB-Teaching/01-03-gigasecond-cleverjohnson,4,2,1,"[datetime.datetime(2022, 3, 19, 10, 44, 20)]",1
+161,01,04,01-04-grains-cleverjohnson,cleverjohnson,https://api.github.com/repos/DB-Teaching/01-04-grains-cleverjohnson,4,2,1,"[datetime.datetime(2022, 3, 19, 12, 31, 44)]",1
+162,01,05,01-05-pangram-cleverjohnson,cleverjohnson,https://api.github.com/repos/DB-Teaching/01-05-pangram-cleverjohnson,4,2,1,"[datetime.datetime(2022, 3, 19, 12, 55, 47)]",1
+163,01,06,01-06-two-fer-cleverjohnson,cleverjohnson,https://api.github.com/repos/DB-Teaching/01-06-two-fer-cleverjohnson,4,2,1,"[datetime.datetime(2022, 3, 19, 13, 6, 53)]",1
+164,01,07,01-07-collatz-conjecture-cleverjohnson,cleverjohnson,https://api.github.com/repos/DB-Teaching/01-07-collatz-conjecture-cleverjohnson,4,2,1,"[datetime.datetime(2022, 3, 19, 13, 27, 35)]",1
+165,02,09,02-09-binary-search-dominikb1888,dominikb1888,https://api.github.com/repos/DB-Teaching/02-09-binary-search-dominikb1888,3,1,0,[],1
+166,01,06,01-06-two-fer-OliviaA22,OliviaA22,https://api.github.com/repos/DB-Teaching/01-06-two-fer-OliviaA22,4,2,1,"[datetime.datetime(2022, 3, 21, 19, 24, 23)]",1
+167,01,07,01-07-collatz-conjecture-OliviaA22,OliviaA22,https://api.github.com/repos/DB-Teaching/01-07-collatz-conjecture-OliviaA22,4,2,1,"[datetime.datetime(2022, 3, 21, 20, 50, 59)]",1
+168,01,08,01-08-bob-OliviaA22,OliviaA22,https://api.github.com/repos/DB-Teaching/01-08-bob-OliviaA22,5,3,1,"[datetime.datetime(2022, 3, 22, 21, 26, 43)]",1
+169,02,11,02-11-isbn-verifier-dominikb1888,dominikb1888,https://api.github.com/repos/DB-Teaching/02-11-isbn-verifier-dominikb1888,3,1,0,[],1
+170,02,13,02-13-pig-latin-dominikb1888,dominikb1888,https://api.github.com/repos/DB-Teaching/02-13-pig-latin-dominikb1888,3,1,0,[],1
+171,02,14,02-14-darts-dominikb1888,dominikb1888,https://api.github.com/repos/DB-Teaching/02-14-darts-dominikb1888,4,2,1,"[datetime.datetime(2022, 3, 25, 8, 20, 42)]",1
+172,01,01,01-01-hello-world-Amit021,Amit021,https://api.github.com/repos/DB-Teaching/01-01-hello-world-Amit021,4,2,0,[],2
+173,02,03,02-03-perfect-numbers-chloe-1111,1111,https://api.github.com/repos/DB-Teaching/02-03-perfect-numbers-chloe-1111,3,1,0,[],1
+174,01,03,01-03-difference-of-squares-michelleschmidt,michelleschmidt,https://api.github.com/repos/DB-Teaching/01-03-difference-of-squares-michelleschmidt,6,4,0,[],4
+175,01,03,01-03-difference-of-squares-chloe-1111,1111,https://api.github.com/repos/DB-Teaching/01-03-difference-of-squares-chloe-1111,4,2,0,[],2
+176,01,01,01-01-hello-world-Marinapozhid,Marinapozhid,https://api.github.com/repos/DB-Teaching/01-01-hello-world-Marinapozhid,24,22,1,"[datetime.datetime(2022, 3, 30, 20, 18, 20)]",21
+177,01,01,01-01-hello-world-murtaza65,murtaza65,https://api.github.com/repos/DB-Teaching/01-01-hello-world-murtaza65,3,1,0,[],1
+178,01,01,01-01-hello-world-MadalinaLupacescu,MadalinaLupacescu,https://api.github.com/repos/DB-Teaching/01-01-hello-world-MadalinaLupacescu,4,2,1,"[datetime.datetime(2022, 3, 23, 7, 22, 49)]",1
+179,01,05,01-05-pangram-efosdan,efosdan,https://api.github.com/repos/DB-Teaching/01-05-pangram-efosdan,3,1,0,[],1
+180,01,06,01-06-two-fer-efosdan,efosdan,https://api.github.com/repos/DB-Teaching/01-06-two-fer-efosdan,3,1,0,[],1
+181,01,05,01-05-pangram-ShahrimaAkter,ShahrimaAkter,https://api.github.com/repos/DB-Teaching/01-05-pangram-ShahrimaAkter,3,1,0,[],1
+182,01,06,01-06-two-fer-murtaza65,murtaza65,https://api.github.com/repos/DB-Teaching/01-06-two-fer-murtaza65,3,1,0,[],1
+183,01,06,01-06-two-fer-Amit021,Amit021,https://api.github.com/repos/DB-Teaching/01-06-two-fer-Amit021,3,1,0,[],1
+184,01,02,01-02-leap-MadalinaLupacescu,MadalinaLupacescu,https://api.github.com/repos/DB-Teaching/01-02-leap-MadalinaLupacescu,3,1,0,[],1
+185,01,01,01-01-hello-world-KizzyAdrain,KizzyAdrain,https://api.github.com/repos/DB-Teaching/01-01-hello-world-KizzyAdrain,4,2,1,"[datetime.datetime(2022, 3, 23, 8, 2, 51)]",1
+186,01,02,01-02-leap-KizzyAdrain,KizzyAdrain,https://api.github.com/repos/DB-Teaching/01-02-leap-KizzyAdrain,4,2,1,"[datetime.datetime(2022, 3, 23, 8, 22, 48)]",1
+187,01,03,01-03-difference-of-squares-KizzyAdrain,KizzyAdrain,https://api.github.com/repos/DB-Teaching/01-03-difference-of-squares-KizzyAdrain,3,1,0,[],1
+188,01,02,01-02-leap-Marinapozhid,Marinapozhid,https://api.github.com/repos/DB-Teaching/01-02-leap-Marinapozhid,7,5,1,"[datetime.datetime(2022, 4, 4, 17, 27, 22)]",4
+189,02,01,02-01-queen-attack-OliviaA22,OliviaA22,https://api.github.com/repos/DB-Teaching/02-01-queen-attack-OliviaA22,4,2,1,"[datetime.datetime(2022, 3, 26, 16, 29, 22)]",1
+190,02,02,02-02-triangle-OliviaA22,OliviaA22,https://api.github.com/repos/DB-Teaching/02-02-triangle-OliviaA22,5,3,2,"[datetime.datetime(2022, 3, 26, 18, 28, 36), datetime.datetime(2022, 3, 27, 9, 18, 56)]",1
+191,02,03,02-03-perfect-numbers-OliviaA22,OliviaA22,https://api.github.com/repos/DB-Teaching/02-03-perfect-numbers-OliviaA22,4,2,1,"[datetime.datetime(2022, 3, 27, 11, 32, 4)]",1
+192,02,04,02-04-sublist-OliviaA22,OliviaA22,https://api.github.com/repos/DB-Teaching/02-04-sublist-OliviaA22,4,2,1,"[datetime.datetime(2022, 3, 27, 12, 12, 39)]",1
+193,02,05,02-05-diamond-OliviaA22,OliviaA22,https://api.github.com/repos/DB-Teaching/02-05-diamond-OliviaA22,4,2,1,"[datetime.datetime(2022, 3, 29, 12, 53, 36)]",1
+194,02,06,02-06-yacht-OliviaA22,OliviaA22,https://api.github.com/repos/DB-Teaching/02-06-yacht-OliviaA22,4,2,1,"[datetime.datetime(2022, 3, 29, 13, 16, 57)]",1
+195,02,01,02-01-queen-attack-cleverjohnson,cleverjohnson,https://api.github.com/repos/DB-Teaching/02-01-queen-attack-cleverjohnson,4,2,1,"[datetime.datetime(2022, 3, 24, 21, 15, 11)]",1
+196,02,03,02-03-perfect-numbers-dominikb1888,dominikb1888,https://api.github.com/repos/DB-Teaching/02-03-perfect-numbers-dominikb1888,4,2,1,"[datetime.datetime(2022, 3, 27, 8, 54, 33)]",1
+197,02,04,02-04-sublist-dominikb1888,dominikb1888,https://api.github.com/repos/DB-Teaching/02-04-sublist-dominikb1888,3,1,0,[],1
+198,03,06,03-06-beer-song-dominikb1888,dominikb1888,https://api.github.com/repos/DB-Teaching/03-06-beer-song-dominikb1888,3,1,0,[],1
+199,03,08,03-08-atbash-cipher-dominikb1888,dominikb1888,https://api.github.com/repos/DB-Teaching/03-08-atbash-cipher-dominikb1888,5,2,1,"[datetime.datetime(2022, 3, 25, 11, 42, 39)]",1
+200,03,09,03-09-series-dominikb1888,dominikb1888,https://api.github.com/repos/DB-Teaching/03-09-series-dominikb1888,4,2,1,"[datetime.datetime(2022, 3, 25, 13, 15, 30)]",1
+201,03,10,03-10-anagram-dominikb1888,dominikb1888,https://api.github.com/repos/DB-Teaching/03-10-anagram-dominikb1888,5,2,1,"[datetime.datetime(2022, 3, 25, 14, 56, 16)]",1
+202,03,12,03-12-list-ops-dominikb1888,dominikb1888,https://api.github.com/repos/DB-Teaching/03-12-list-ops-dominikb1888,3,1,0,[],1
+203,02,02,02-02-triangle-cleverjohnson,cleverjohnson,https://api.github.com/repos/DB-Teaching/02-02-triangle-cleverjohnson,4,2,1,"[datetime.datetime(2022, 3, 27, 8, 38, 57)]",1
+204,03,13,03-13-house-dominikb1888,dominikb1888,https://api.github.com/repos/DB-Teaching/03-13-house-dominikb1888,3,1,0,[],1
+205,02,03,02-03-perfect-numbers-cleverjohnson,cleverjohnson,https://api.github.com/repos/DB-Teaching/02-03-perfect-numbers-cleverjohnson,4,2,1,"[datetime.datetime(2022, 3, 27, 8, 37, 19)]",1
+206,02,04,02-04-sublist-cleverjohnson,cleverjohnson,https://api.github.com/repos/DB-Teaching/02-04-sublist-cleverjohnson,4,2,1,"[datetime.datetime(2022, 3, 29, 7, 15, 3)]",1
+207,02,01,02-01-queen-attack-Ikesee-Ikemefuna,Ikemefuna,https://api.github.com/repos/DB-Teaching/02-01-queen-attack-Ikesee-Ikemefuna,3,4,0,[],4
+208,03,04,03-04-sum-of-multiples-joeniho,joeniho,https://api.github.com/repos/DB-Teaching/03-04-sum-of-multiples-joeniho,3,1,0,[],1
+209,01,01,01-01-hello-world-Md-Sadman-Sakib-Kabbo,Kabbo,https://api.github.com/repos/DB-Teaching/01-01-hello-world-Md-Sadman-Sakib-Kabbo,3,1,0,[],1
+210,04,01,04-01-etl-dominikb1888,dominikb1888,https://api.github.com/repos/DB-Teaching/04-01-etl-dominikb1888,3,1,0,[],1
+211,04,02,04-02-say-dominikb1888,dominikb1888,https://api.github.com/repos/DB-Teaching/04-02-say-dominikb1888,4,2,1,"[datetime.datetime(2022, 3, 28, 18, 36, 32)]",1
+212,01,03,01-03-difference-of-squares-joeniho,joeniho,https://api.github.com/repos/DB-Teaching/01-03-difference-of-squares-joeniho,4,2,0,[],2
+213,04,03,04-03-wordy-dominikb1888,dominikb1888,https://api.github.com/repos/DB-Teaching/04-03-wordy-dominikb1888,3,1,0,[],1
+214,08,14,08-14-acronym-dominikb1888,dominikb1888,https://api.github.com/repos/DB-Teaching/08-14-acronym-dominikb1888,4,2,1,"[datetime.datetime(2022, 3, 29, 11, 35, 51)]",1
+215,02,07,02-07-pythagorean-triplet-OliviaA22,OliviaA22,https://api.github.com/repos/DB-Teaching/02-07-pythagorean-triplet-OliviaA22,3,1,0,[],1
+216,02,08,02-08-matching-brackets-OliviaA22,OliviaA22,https://api.github.com/repos/DB-Teaching/02-08-matching-brackets-OliviaA22,5,3,1,"[datetime.datetime(2022, 4, 3, 13, 43, 35)]",2
+217,02,09,02-09-binary-search-OliviaA22,OliviaA22,https://api.github.com/repos/DB-Teaching/02-09-binary-search-OliviaA22,3,1,0,[],1
+218,02,10,02-10-reverse-string-OliviaA22,OliviaA22,https://api.github.com/repos/DB-Teaching/02-10-reverse-string-OliviaA22,4,2,1,"[datetime.datetime(2022, 4, 3, 12, 36, 36)]",1
+219,04,04,04-04-crypto-square-dominikb1888,dominikb1888,https://api.github.com/repos/DB-Teaching/04-04-crypto-square-dominikb1888,3,1,0,[],1
+220,04,04,04-04-hamming-dominikb1888,dominikb1888,https://api.github.com/repos/DB-Teaching/04-04-hamming-dominikb1888,4,2,1,"[datetime.datetime(2022, 3, 29, 20, 32, 19)]",1
+221,04,05,04-05-matrix-dominikb1888,dominikb1888,https://api.github.com/repos/DB-Teaching/04-05-matrix-dominikb1888,3,1,0,[],1
+222,01,03,01-03-difference-of-squares-Marinapozhid,Marinapozhid,https://api.github.com/repos/DB-Teaching/01-03-difference-of-squares-Marinapozhid,3,1,0,[],1
+223,01,03,01-03-difference-of-squares-MadalinaLupacescu,MadalinaLupacescu,https://api.github.com/repos/DB-Teaching/01-03-difference-of-squares-MadalinaLupacescu,3,1,0,[],1
+224,01,03,01-03-difference-of-squares-ShahrimaAkter,ShahrimaAkter,https://api.github.com/repos/DB-Teaching/01-03-difference-of-squares-ShahrimaAkter,3,1,0,[],1
+225,04,06,04-06-minesweeper-dominikb1888,dominikb1888,https://api.github.com/repos/DB-Teaching/04-06-minesweeper-dominikb1888,3,1,0,[],1
+226,01,02,01-02-leap-Amit021,Amit021,https://api.github.com/repos/DB-Teaching/01-02-leap-Amit021,6,4,1,"[datetime.datetime(2022, 4, 1, 12, 52, 6)]",3
+227,04,07,04-07-palindrome-products-dominikb1888,dominikb1888,https://api.github.com/repos/DB-Teaching/04-07-palindrome-products-dominikb1888,4,2,0,[],2
+228,02,05,02-05-diamond-cleverjohnson,cleverjohnson,https://api.github.com/repos/DB-Teaching/02-05-diamond-cleverjohnson,4,2,1,"[datetime.datetime(2022, 3, 30, 22, 22, 42)]",1
+229,04,08,04-08-raindrops-dominikb1888,dominikb1888,https://api.github.com/repos/DB-Teaching/04-08-raindrops-dominikb1888,3,1,0,[],1
+230,04,09,04-09-robot-name-dominikb1888,dominikb1888,https://api.github.com/repos/DB-Teaching/04-09-robot-name-dominikb1888,3,1,0,[],1
+231,02,07,02-07-pythagorean-triplet-dominikb1888,dominikb1888,https://api.github.com/repos/DB-Teaching/02-07-pythagorean-triplet-dominikb1888,3,1,0,[],1
+232,02,10,02-10-reverse-string-dominikb1888,dominikb1888,https://api.github.com/repos/DB-Teaching/02-10-reverse-string-dominikb1888,3,1,0,[],1
+233,02,12,02-12-rna-transcription-dominikb1888,dominikb1888,https://api.github.com/repos/DB-Teaching/02-12-rna-transcription-dominikb1888,3,1,0,[],1
+234,03,01,03-01-phone-number-dominikb1888,dominikb1888,https://api.github.com/repos/DB-Teaching/03-01-phone-number-dominikb1888,3,1,0,[],1
+235,03,02,03-02-armstrong-numbers-dominikb1888,dominikb1888,https://api.github.com/repos/DB-Teaching/03-02-armstrong-numbers-dominikb1888,1,0,0,[],0
+236,03,03,03-03-nth-prime-dominikb1888,dominikb1888,https://api.github.com/repos/DB-Teaching/03-03-nth-prime-dominikb1888,3,1,0,[],1
+237,03,04,03-04-sum-of-multiples-dominikb1888,dominikb1888,https://api.github.com/repos/DB-Teaching/03-04-sum-of-multiples-dominikb1888,3,1,0,[],1
+238,03,05,03-05-prime-factors-dominikb1888,dominikb1888,https://api.github.com/repos/DB-Teaching/03-05-prime-factors-dominikb1888,3,1,0,[],1
+239,03,07,03-07-flatten-array-dominikb1888,dominikb1888,https://api.github.com/repos/DB-Teaching/03-07-flatten-array-dominikb1888,3,1,0,[],1
+240,03,11,03-11-resistor-color-dominikb1888,dominikb1888,https://api.github.com/repos/DB-Teaching/03-11-resistor-color-dominikb1888,5,3,0,[],3
+241,02,06,02-06-yacht-cleverjohnson,cleverjohnson,https://api.github.com/repos/DB-Teaching/02-06-yacht-cleverjohnson,4,2,1,"[datetime.datetime(2022, 4, 1, 10, 4, 10)]",1
+242,03,14,03-14-resistor-color-duo-dominikb1888,dominikb1888,https://api.github.com/repos/DB-Teaching/03-14-resistor-color-duo-dominikb1888,5,3,0,[],3
+243,01,11,01-11-high-scores-dominikb1888,dominikb1888,https://api.github.com/repos/DB-Teaching/01-11-high-scores-dominikb1888,5,3,0,[],3
+244,02,07,02-07-pythagorean-triplet-cleverjohnson,cleverjohnson,https://api.github.com/repos/DB-Teaching/02-07-pythagorean-triplet-cleverjohnson,4,2,1,"[datetime.datetime(2022, 4, 1, 10, 13, 15)]",1
+245,01,03,01-03-difference-of-squares-Amit021,Amit021,https://api.github.com/repos/DB-Teaching/01-03-difference-of-squares-Amit021,7,5,1,"[datetime.datetime(2022, 4, 3, 13, 11, 16)]",4
+246,01,03,01-03-gigasecond-joeniho,joeniho,https://api.github.com/repos/DB-Teaching/01-03-gigasecond-joeniho,3,1,0,[],1
+247,02,08,02-08-matching-brackets-cleverjohnson,cleverjohnson,https://api.github.com/repos/DB-Teaching/02-08-matching-brackets-cleverjohnson,5,3,2,"[datetime.datetime(2022, 4, 1, 20, 47, 20), datetime.datetime(2022, 4, 1, 20, 48, 27)]",1
+248,02,09,02-09-binary-search-cleverjohnson,cleverjohnson,https://api.github.com/repos/DB-Teaching/02-09-binary-search-cleverjohnson,4,2,1,"[datetime.datetime(2022, 4, 3, 7, 56, 1)]",1
+249,01,09,01-09-resistor-color-OliviaA22,OliviaA22,https://api.github.com/repos/DB-Teaching/01-09-resistor-color-OliviaA22,5,3,2,"[datetime.datetime(2022, 4, 3, 12, 18, 3), datetime.datetime(2022, 4, 3, 14, 41, 40)]",1
+250,01,03,01-03-gigasecond-Amit021,Amit021,https://api.github.com/repos/DB-Teaching/01-03-gigasecond-Amit021,5,3,1,"[datetime.datetime(2022, 4, 4, 11, 57, 24)]",2
+251,02,11,02-11-isbn-verifier-OliviaA22,OliviaA22,https://api.github.com/repos/DB-Teaching/02-11-isbn-verifier-OliviaA22,3,1,0,[],1
+252,01,03,01-03-difference-of-squares-ProfEnergyHuber,ProfEnergyHuber,https://api.github.com/repos/DB-Teaching/01-03-difference-of-squares-ProfEnergyHuber,3,1,0,[],1
+253,01,04,01-04-grains-Amit021,Amit021,https://api.github.com/repos/DB-Teaching/01-04-grains-Amit021,15,13,0,[],13
+254,05,01,05-01-robot-simulator-dominikb1888,dominikb1888,https://api.github.com/repos/DB-Teaching/05-01-robot-simulator-dominikb1888,3,1,0,[],1
+255,01,06,01-06-two-fer-yadwinder1905,yadwinder1905,https://api.github.com/repos/DB-Teaching/01-06-two-fer-yadwinder1905,4,2,0,[],2
+256,02,10,02-10-reverse-string-cleverjohnson,cleverjohnson,https://api.github.com/repos/DB-Teaching/02-10-reverse-string-cleverjohnson,5,3,2,"[datetime.datetime(2022, 4, 5, 8, 37), datetime.datetime(2022, 4, 5, 11, 30, 13)]",1
+257,02,11,02-11-isbn-verifier-cleverjohnson,cleverjohnson,https://api.github.com/repos/DB-Teaching/02-11-isbn-verifier-cleverjohnson,3,1,0,[],1
+258,02,12,02-12-rna-transcription-cleverjohnson,cleverjohnson,https://api.github.com/repos/DB-Teaching/02-12-rna-transcription-cleverjohnson,4,2,1,"[datetime.datetime(2022, 4, 7, 17, 56, 50)]",1
+259,01,03,01-03-difference-of-squares-yadwinder1905,yadwinder1905,https://api.github.com/repos/DB-Teaching/01-03-difference-of-squares-yadwinder1905,3,1,0,[],1
+260,02,14,02-14-darts-Amit021,Amit021,https://api.github.com/repos/DB-Teaching/02-14-darts-Amit021,3,1,0,[],1
+261,02,14,02-14-darts-Tanmaytc25,Tanmaytc25,https://api.github.com/repos/DB-Teaching/02-14-darts-Tanmaytc25,3,1,0,[],1
+262,02,14,02-14-darts-yadwinder1905,yadwinder1905,https://api.github.com/repos/DB-Teaching/02-14-darts-yadwinder1905,3,1,0,[],1
+263,01,03,01-03-gigasecond-MadalinaLupacescu,MadalinaLupacescu,https://api.github.com/repos/DB-Teaching/01-03-gigasecond-MadalinaLupacescu,3,1,0,[],1
+264,01,03,01-03-gigasecond-Marinapozhid,Marinapozhid,https://api.github.com/repos/DB-Teaching/01-03-gigasecond-Marinapozhid,3,1,0,[],1
+265,02,14,02-14-darts-MadalinaLupacescu,MadalinaLupacescu,https://api.github.com/repos/DB-Teaching/02-14-darts-MadalinaLupacescu,3,1,0,[],1
+266,02,14,02-14-darts-Marinapozhid,Marinapozhid,https://api.github.com/repos/DB-Teaching/02-14-darts-Marinapozhid,3,1,0,[],1
+267,01,02,01-02-leap-staycliz,staycliz,https://api.github.com/repos/DB-Teaching/01-02-leap-staycliz,4,2,1,"[datetime.datetime(2022, 4, 7, 19, 35, 12)]",1
+268,01,03,01-03-difference-of-squares-staycliz,staycliz,https://api.github.com/repos/DB-Teaching/01-03-difference-of-squares-staycliz,4,2,1,"[datetime.datetime(2022, 4, 7, 20, 6, 13)]",1
+269,01,09,01-09-resistor-color-cleverjohnson,cleverjohnson,https://api.github.com/repos/DB-Teaching/01-09-resistor-color-cleverjohnson,4,2,1,"[datetime.datetime(2022, 4, 8, 20, 2, 27)]",1
+270,01,10,01-10-resistor-color-duo-cleverjohnson,cleverjohnson,https://api.github.com/repos/DB-Teaching/01-10-resistor-color-duo-cleverjohnson,4,2,1,"[datetime.datetime(2022, 4, 8, 20, 7, 33)]",1
+271,02,14,02-14-darts-cleverjohnson,cleverjohnson,https://api.github.com/repos/DB-Teaching/02-14-darts-cleverjohnson,4,2,1,"[datetime.datetime(2022, 4, 8, 20, 12, 33)]",1
+272,02,13,02-13-pig-latin-cleverjohnson,cleverjohnson,https://api.github.com/repos/DB-Teaching/02-13-pig-latin-cleverjohnson,3,1,0,[],1
+273,01,03,01-03-gigasecond-yadwinder1905,yadwinder1905,https://api.github.com/repos/DB-Teaching/01-03-gigasecond-yadwinder1905,3,1,0,[],1
