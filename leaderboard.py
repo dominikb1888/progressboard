@@ -1,6 +1,9 @@
 from github import Github
+from collections import defaultdict, OrderedDict
 import json
 import pandas as pd
+import plotly
+import plotly.express as px
 from dotenv import load_dotenv  # for python-dotenv method
 import re
 
@@ -9,24 +12,23 @@ load_dotenv()  # for python-dotenv method
 import os
 
 
+class OrderedDefaultDict(OrderedDict):
+    def __missing__(self, key):
+        value = list()
+        self[key] = value
+        return value
+
+
 class Leaderboard:
     def __init__(self, org="DB-Teaching", key=os.environ.get("GHTOKEN")):
         self.gh = Github(key)
         self.org = org
         self.repos = self._get_repos()
-        self.users = list(
-            set(
-                [
-                    user.login
-                    for user in self.gh.get_organization(
-                        "DB-Teaching"
-                    ).get_outside_collaborators()
-                ]
-            )
-        )
         self.dataframe = self._get_table()
+        self.users = self._get_users()
         self.leaderboard = self._gen_heatmap_abs()
-        self.heatmap = self._gen_heatmap_rel()
+        self.relative = self._gen_heatmap_rel()
+        self.heatmap = self._gen_plot()
 
     # def __repr__():
     #     return self.dataframe.to_markdown
@@ -50,6 +52,27 @@ class Leaderboard:
         with open("repos.json", "r") as f:
             return json.loads(f.read())
 
+    def _get_users(self):
+        users = list(
+            set(
+                [
+                    user.login
+                    for user in self.gh.get_organization(
+                        "DB-Teaching"
+                    ).get_outside_collaborators()
+                ]
+            )
+        )
+
+        user_data = defaultdict(list)
+        for repo in self.dataframe.to_dict(orient="records"):
+            if repo["user"]:
+                for user in users:
+                    if user == repo["user"]:
+                        user_data[user].append(repo)
+
+        return user_data
+
     def _get_table(self):
         df = []
         if not os.path.exists("leaderboard.csv"):
@@ -61,8 +84,8 @@ class Leaderboard:
                 commits = repo_obj.get_commits()
                 df.append(
                     {
-                        "session": session,
-                        "exercise": exercise,
+                        "session": int(session),
+                        "exercise": int(exercise),
                         "name": repo["name"],
                         "user": repo["name"].split("-")[-1],
                         "url": repo["url"],
@@ -143,10 +166,19 @@ class Leaderboard:
 
         return rel
 
-    # def heatmap(self):
-    #     rel = self._gen_heatmap_rel()
-    #     sns.set(rc={"figure.figsize": (10, 8)})
-    #     return sns.heatmap(rel.iloc[1:, 0:14], annot=lb.iloc[1:, 0:14], cmap="YlGnBu")
+    def _gen_plot(self):
+        rel = self.relative
+        lb = self.leaderboard
+
+        fig = px.imshow(
+            rel.iloc[1:, 0:14],
+            color_continuous_scale=px.colors.sequential.Cividis_r,
+            text_auto=True,
+        )
+        # sns.heatmap(rel.iloc[1:, 0:14], annot=lb.iloc[1:, 0:14], cmap="YlGnBu")
+
+        fig.update_layout(width=1500, height=500)
+        return json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
 
     # def to_html(self):
     #     heatmap = self.heatmap()
