@@ -1,0 +1,17 @@
+<html>
+
+<head>
+  <title></title>
+  <!-- Import Plotly (does not have to be from CDN) -->
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+
+<body>
+  <div id="plotly-timeseries"></div>
+  <script>
+    var graph = {{plot_json | safe }};
+    Plotly.plot('plotly-timeseries', graph, {});
+  </script>
+</body>
+
+</html>

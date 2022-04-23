@@ -22,7 +22,7 @@ source app/bin/activate
 ## Install dependencies and list them in requirements.txt
 
 ```bash
-pip install pandas flask seaborn virtualenv
+pip install pandas flask seaborn virtualenv pygithub python-dotenv
 
 pip freeze > requirements.txt
 ```
@@ -48,4 +48,22 @@ def hello():
 if __name__ == "__main__":
   app.run()
 ```
+
+Commit the first version without much functionality
+
+```bash
+git commit -am 'initial webapp with flask boilerplate'
+```
+
+
+## Add the leaderboard class
+
+```bash
+git commit -am 'added first version of Leaderboard class'
+git add leaderboard.py
+
+cp _archive/leaderboard.py  .
+```
+
+
 
