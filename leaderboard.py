@@ -84,8 +84,8 @@ class Leaderboard:
                 commits = repo_obj.get_commits()
                 df.append(
                     {
-                        "session": int(session),
-                        "exercise": int(exercise),
+                        "session": session,
+                        "exercise": exercise,
                         "name": repo["name"],
                         "user": repo["name"].split("-")[-1],
                         "url": repo["url"],
