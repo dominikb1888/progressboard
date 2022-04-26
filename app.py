@@ -8,7 +8,11 @@ leaderboard = Leaderboard(org="DB-Teaching")
 
 @app.route("/")
 def index():
-    return render_template("index.html", plot_json=leaderboard.heatmap)
+    return render_template(
+        "index.html",
+        plot_json=leaderboard.heatmap,
+        plot_dict=json.loads(leaderboard.heatmap),
+    )
 
 
 @app.route("/api/v1/data")
