@@ -53,16 +53,22 @@ class Leaderboard:
             return json.loads(f.read())
 
     def _get_users(self):
-        users = list(
-            set(
-                [
-                    user.login
-                    for user in self.gh.get_organization(
-                        "DB-Teaching"
-                    ).get_outside_collaborators()
-                ]
-            )
-        )
+        if not os.path.exists("users.json"):
+            with open("users.json") as f:
+                users = list(
+                    set(
+                        [
+                            user.login
+                            for user in self.gh.get_organization(
+                                "DB-Teaching"
+                            ).get_outside_collaborators()
+                        ]
+                    )
+                )
+                json_dump(users, f, ensure_ascii=False, indent=4)
+
+        with open("users.json", "r") as f:
+            users = json.loads(f.read())
 
         user_data = defaultdict(list)
         for repo in self.dataframe.to_dict(orient="records"):
