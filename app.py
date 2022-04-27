@@ -7,9 +7,9 @@ leaderboard = Leaderboard(org="DB-Teaching")
 
 
 @app.route("/")
-def index():
+def heatmap():
     return render_template(
-        "index.html",
+        "heatmap.html",
         plot_json=leaderboard.heatmap,
         plot_dict=json.loads(leaderboard.heatmap),
         users=leaderboard.users,

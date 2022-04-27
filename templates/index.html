@@ -1,55 +1,15 @@
-<html>
+<! doctype html>
+  <html>
 
-<head>
-  <title>Leaderboard</title>
-  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
-</head>
+  <head>
+    <title>Leaderboard</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+  </head>
 
-<body>
-  <div id=title-bar>
-    <h1>Leaderboard</h1>
-  </div>
-  <div id="color-gradient"></div>
-  <table id="man-heatmap">
-    {% for name in plot_dict['data'][0]['y'] %}
-    <tr>
-      <th class='color name'><a href="#">{{name}}</a></th>
-      {% for score in plot_dict['data'][0]['z'][loop.index-1] %}
-      {% set color_code = (score/10 + 0.8) | int | round(0, 'floor') | int %}
-      {% set outer_loop = loop %}
-      <td class='color color_{{ color_code }}'>
-        <ul>
-          {% for repo in users[name] %}
-          {% if (repo['session'] | int) == outer_loop.index %}
-          <li>
-            <a href={{repo.url}}>
-              {% if repo.completed>=1 %}
-              <span style='color:green;'>&#9679;</span>
-              {% elif repo.failed>0 and repo.completed==0 %}
-              <span style='color:red;'>&#9679;</span>
-              {% elif repo.failed==0 and repo.completed==0 %}
-              &#9675;
-              {% endif %}
-            </a>
-            {% endif %}
-          </li>
-          {% endfor %}
-        </ul>
-        <!-- <span class='score'>{{ score }}%</span> -->
+  <body>
+    {% include 'header.html' %}
+    {% block content %}{% endblock %}
+    {% include 'footer.html' %}
+  </body>
 
-
-      </td>
-      {% endfor %}
-    </tr>
-    {% endfor %}
-    <tr>
-      <th class='color lineplot'><a href='#'>#</a></th>
-      {% for session in plot_dict['data'][0]['x'] %}
-      <th class='color session'><a href='#'>{{session}}</a></th>
-      {% endfor %}
-    </tr>
-  </table>
-
-</body>
-
-</html>
+  </html>
