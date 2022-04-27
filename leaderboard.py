@@ -35,6 +35,7 @@ class Leaderboard:
     #     """ Creates Markdown Output for CLI or Github """
     #     # .apply(lambda row: "".join(["\u258F" * int(i) for i in row if i != '']), axis=1)
     #     # .to_markdown()
+
     def _get_repos(self):
         if not os.path.exists("repos.json"):
             repos = self.gh.get_organization(self.org).get_repos()
@@ -94,7 +95,7 @@ class Leaderboard:
                         "exercise": exercise,
                         "name": repo["name"],
                         "user": repo["name"].split("-")[-1],
-                        "url": repo["url"],
+                        "url": repo["html_url"],
                         "commits": sum([1 for _ in commits]),
                         "runs": runs.totalCount,
                         "completed": sum(
@@ -111,10 +112,9 @@ class Leaderboard:
         df = pd.read_csv("leaderboard.csv")
         return df
 
-    # TODO: Local Update from Github
     # def _check_update(self):
-    #     for local_repo in pd.read_csv("leaderboard.csv"):
-    #         if local_repo["updated"]:
+    #     for local_repo in json_loads("repos.json"):
+    #         if local_repo["updated_at"]:
     #             updated_local = local_repo["updated"]
     #         if repo["updated_at"] > updated_local:
     #             return False

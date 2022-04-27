@@ -12,6 +12,7 @@ def index():
         "index.html",
         plot_json=leaderboard.heatmap,
         plot_dict=json.loads(leaderboard.heatmap),
+        users=leaderboard.users,
     )
 
 
