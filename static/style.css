@@ -72,6 +72,8 @@
     }
 
     table#man-heatmap {
+      display: block;
+      table-layout: fixed;
       font-size: 140%;
       width: 98%;
       padding: 0;
