@@ -99,7 +99,7 @@ class Leaderboard:
                 margins_name="Total",
             )
             .astype(int)
-            .sort_values(by="Total", ascending=False)
+            .sort_values(by="user", ascending=True)
         )
 
         return lb
