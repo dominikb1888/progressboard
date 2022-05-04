@@ -10,7 +10,6 @@ leaderboard = Leaderboard(org="DB-Teaching")
 def heatmap():
     return render_template(
         "heatmap.html",
-        plot_json=leaderboard.heatmap,
         plot_dict=json.loads(leaderboard.heatmap),
         users=leaderboard.users,
     )
@@ -18,17 +17,23 @@ def heatmap():
 
 @app.route("/api/v1/data")
 def api_data():
-    return jsonify(leaderboard.dataframe.to_dict(orient="records"))
+    request = jsonify(leaderboard.dataframe.to_dict(orient="records"))
+    request.headers.add("Access-Control-Allow-Origin", "*")
+    return request
 
 
 @app.route("/api/v1/repos")
 def api_repos():
-    return jsonify(leaderboard.repos)
+    request = jsonify(leaderboard.repos)
+    request.headers.add("Access-Control-Allow-Origin", "*")
+    return request
 
 
 @app.route("/api/v1/users")
 def api_users():
-    return jsonify(leaderboard.users)
+    request = jsonify(leaderboard.users)
+    request.headers.add("Access-Control-Allow-Origin", "*")
+    return request
 
 
 @app.route("/api/v1/users/<string:user_name>")
@@ -37,7 +42,9 @@ def api_user(user_name):
     user = [users[user] for user in users.keys() if user == user_name]
     if len(user) == 0:
         abort(404)
-    return jsonify(user[0])
+    request = jsonify(user[0])
+    request.headers.add("Access-Control-Allow-Origin", "*")
+    return request
 
 
 if __name__ == "__main__":

@@ -16,12 +16,14 @@
         {% if (repo['session'] | int) == outer_loop.index %}
         <li>
           <a href={{repo.url}}>
-            {% if repo.completed>=1 %}
+            {% if repo.completed>0 %}
             <span style='color:green;'>&#9679;</span>
             {% elif repo.failed>0 and repo.completed==0 %}
             <span style='color:red;'>&#9679;</span>
+            {% elif repo.failed>0 and repo.completed>0 %}
+            <span style='color:orange;'>&#9679;</span>
             {% elif repo.failed==0 and repo.completed==0 %}
-            &#9675;
+            <span>&#9675;</span>
             {% endif %}
           </a>
           {% endif %}
