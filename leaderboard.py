@@ -132,7 +132,7 @@ class Leaderboard:
         lb = self.leaderboard
 
         fig = px.imshow(
-            rel.iloc[1:, 0:14],
+            rel.iloc[0:, 0:14],
             color_continuous_scale=px.colors.sequential.Cividis_r,
             text_auto=True,
         )
