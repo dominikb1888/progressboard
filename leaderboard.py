@@ -54,12 +54,17 @@ class Leaderboard:
             session, exercise = self._split_repo_name(repo["name"])
             runs = self.gh.get_repo_resource(self.org, repo["name"], "actions/runs")
             commits = self.gh.get_repo_resource(self.org, repo["name"], "commits")
+            username = ""
+            for user in self.gh.get_org_resource(self.org, "outside_collaborators"):
+                if user["login"] in repo["name"]:
+                    username = user["login"]
+
             df.append(
                 {
                     "session": session,
                     "exercise": exercise,
                     "name": repo["name"],
-                    "user": repo["name"].split("-")[-1],
+                    "user": username if username else "dominikb1888",
                     "url": repo["html_url"],
                     "commits": len(commits),
                     "runs": len(runs),
