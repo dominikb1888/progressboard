@@ -1,4 +1,5 @@
 from flask import Flask, abort, jsonify, render_template
+import flask_profiler
 from leaderboard import Leaderboard
 import json
 
@@ -46,6 +47,8 @@ def api_user(user_name):
     request.headers.add("Access-Control-Allow-Origin", "*")
     return request
 
+
+flask_profiler.init_app(app)
 
 if __name__ == "__main__":
     app.run()
