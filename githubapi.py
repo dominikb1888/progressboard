@@ -47,3 +47,6 @@ class GithubAPI:
 
     def get_repo_resource(self, org, repo, resource):
         return self._get(f"repos/{org}/{repo}", resource)
+
+    def get_repo_commit_status(self, org, repo, ref, resource):
+        return self._get(f"repos/{org}/{repo}/commits/{ref}", resource)

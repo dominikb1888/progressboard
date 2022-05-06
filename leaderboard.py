@@ -52,9 +52,8 @@ class Leaderboard:
                 continue
 
             session, exercise = self._split_repo_name(repo["name"])
-            runs = self.gh.get_repo_resource(self.org, repo["name"], "actions/runs")
             commits = self.gh.get_repo_resource(self.org, repo["name"], "commits")
-            username = ""
+            username = None
             for user in self.gh.get_org_resource(self.org, "outside_collaborators"):
                 if user["login"] in repo["name"]:
                     username = user["login"]
@@ -67,15 +66,50 @@ class Leaderboard:
                     "user": username if username else "dominikb1888",
                     "url": repo["html_url"],
                     "commits": len(commits),
-                    "runs": len(runs),
-                    "completed": sum([1 for w in runs if w["conclusion"] == "success"]),
-                    "failed": sum([1 for w in runs if w["conclusion"] != "failure"]),
+                    "status": self.get_status(commits, repo),
                 }
             )
 
         df = pd.DataFrame(df)
+        df = df.sort_values(by=["name"])
         df.to_csv("leaderboard.csv")
         return df
+
+    def get_status(self, commits, repo):
+        """Returns the status of a repo based on workflow runs"""
+        conclusions = []
+        for commit in commits:
+            if commit["commit"]["author"]["name"] not in [
+                "github-classroom[bot]",
+                "github-classroom",
+            ]:
+                check_suite = self.gh.get_repo_commit_status(
+                    self.org, repo["name"], commit["sha"], "check-suites"
+                )
+                if check_suite["total_count"] > 0:
+                    conclusions.append(check_suite["check_suites"][0]["conclusion"])
+
+        if len(conclusions) == 0:
+            return "not-started"
+
+        workflows = self.gh.get_repo_resource(self.org, repo["name"], "actions/runs")
+
+        if workflows:
+            conclusions = [
+                (run["run_started_at"], run["conclusion"], repo["name"])
+                for run in workflows
+            ]
+
+            conclusions = [c for _, c, _ in conclusions]
+
+            if all(c == "failure" for c in conclusions):
+                return "failing"
+
+            if conclusions[0] == "failure" and any(c == "success" for c in conclusions):
+                return "rework"
+
+            if any(c == "success" for c in conclusions):
+                return "completed"
 
     @staticmethod
     def _split_repo_name(name):
@@ -129,7 +163,6 @@ class Leaderboard:
 
     def _gen_plot(self):
         rel = self.relative
-        lb = self.leaderboard
 
         fig = px.imshow(
             rel.iloc[0:, 0:14],

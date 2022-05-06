@@ -1,8 +1,3 @@
-    html,
-    body {
-      max-width: 100%;
-      overflow-x: hidden;
-    }
 
     body {
       font-family: Roboto, sans-serif;
@@ -24,108 +19,66 @@
       color: #fff;
     }
 
-    div#color-gradient {
-      background: #bd9f63;
-      background-image: linear-gradient(90deg, #a50026, #d3322b, #f16d43, #fcab63, #fedc8c, #f9f7ae, #d7ee8e, #a4d86f, #64bc61, #23964f, #23964f)
-    }
-
-
-
-    .color_0 {
-      background-color: #a50026
-    }
-
-    .color_1 {
-      background-color: #d3322b
-    }
-
-    .color_2 {
-      background-color: #f16d43
-    }
-
-    .color_3 {
-      background-color: #fcab63
-    }
-
-    .color_4 {
-      background-color: #fedc8c
-    }
-
-    .color_5 {
-      background-color: #f9f7ae
-    }
-
-    .color_6 {
-      background-color: #d7ee8e
-    }
-
-    .color_7 {
-      background-color: #a4d86f
-    }
-
-    .color_8 {
-      background-color: #64bc61
-    }
-
-    .color_9 {
-      background-color: #23964f
-    }
+    .color_0, .color_1 { background-color: #949494; }
+    .color_2, .color_3 { background-color: #AEAEAE; }
+    .color_4, .color_5 { background-color: #EEECF1; }
+    .color_6, .color_7 { background-color: #ADC3D1; }
+    .color_8, .color_9 { background-color: #8FB1CC; }
+    .color_10          { background-color: #759CC9; }
 
     table#man-heatmap {
-      display: block;
-      table-layout: fixed;
-      font-size: 140%;
-      width: 98%;
-      padding: 0;
-      margin: 3% 0% 3% 1%;
+      width: 100%;
     }
 
-    table#man-heatmap th,
-    table#man-heatmap td {
-      width: 5.6%;
-      /* = width for a 1:1 aspect ratio */
-      margin: .3%;
-      overflow: hidden;
-    }
-
-    table#man-heatmap th.name,
-    table#man-heatmap th.lineplot {
+    table#man-heatmap th.name {
+      background-color: #759CC9;
       width: 10%;
       padding: 2.8% 0;
     }
 
-    table#man-heatmap th.name a {
+    table#man-heatmap th a {
       text-decoration: none;
-      color: #ddd;
+      color: #eee;
     }
 
-    table#man-heatmap th.session a {
-      text-decoration: none;
+    table#man-heatmap tr.header th {
+      background-color: #759CC9;
+      padding: 2% 0 0.3% 0; 
     }
-
-    table#man-heatmap td.color a:hover {
-      filter: saturate(130%);
-    }
-
-    table#man-heatmap th {
-      background-color: #666;
-      color: #999;
-    }
-
-    table#man-heatmap td ul {
-      columns: 4;
-      list-style-type: none;
-      padding: 0 25% 15% 5%;
-      margin: 0;
-    }
-
     
-    table#man-heatmap td ul li a {
-      font-size: 250%;
-      line-height: 40%;
-      text-decoration: none;
-      color: #333;
-      text-align: top;
+    table#man-heatmap td {
+      vertical-align: top;
+      padding: 1.5% 1%;
+    } 
+    table#man-heatmap td ul {
+      padding: 0;
+      margin: 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      grid-gap: 5% 6%;
+      list-style-type: none;
     }
+
+    table#man-heatmap td ul li {
+      display: inline-block;
+      border-radius: 10%;
+      aspect-ratio: 1;
+    }
+
+    table#man-heatmap td ul li a {
+      border-radius: 7%;
+      width: 100%;
+      height: 100%;
+      aspect-ratio: 1;
+      padding: 20% 10% 10% 25%;
+      text-decoration: none;
+      font-size: 100%;
+    }
+
+    table#man-heatmap a.completed:link, table#man-heatmap a.completed:visited {background-color: #BEE5B0; color: #fff; }
+    table#man-heatmap a.failing:link, table#man-heatmap a.failing:visited {background-color: #FB6962; color: #fff; }
+    table#man-heatmap a.not-started:link, table#man-heatmap a.not-started:visited {background-color: #fff; color: #AEAEAE; } 
+    table#man-heatmap a.rework:link, table#man-heatmap a.rework:visited {background-color: #FCFC99; color: #AEAEAE; }
+
 
 

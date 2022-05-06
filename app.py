@@ -11,7 +11,7 @@ app.config["DEBUG"] = True
 app.config["flask_profiler"] = {
     "enabled": app.config["DEBUG"],
     "storage": {"engine": "sqlite"},
-    "basicAuth": {"enabled": True, "username": "admin", "password": "admin"},
+    "basicAuth": {"enabled": True, "username": "dominikb1888", "password": "4pFL2WWb"},
     "ignore": ["^/static/.*"],
 }
 
