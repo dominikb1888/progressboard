@@ -32,8 +32,10 @@
 
     table#man-heatmap th.name {
       background-color: #759CC9;
-      width: 10%;
+      aspect-ratio: 1;
       padding: 2.8% 0;
+      border: 10% solid #fff !important;
+      border-radius: 10%;
     }
 
     table#man-heatmap th a {
@@ -43,19 +45,26 @@
 
     table#man-heatmap tr.header th {
       background-color: #759CC9;
-      padding: 2% 0 0.3% 0; 
+      padding: 2% 0 2.8% 0;
+      aspect-ratio: 1;
+      border: 10% solid #fff !important;
+      border-radius: 10%;
     }
     
     table#man-heatmap td {
       vertical-align: top;
-      padding: 1.5% 1%;
-    } 
+      padding: 0.5% 1% 1.2% 0.5%;
+      border: 10% solid #fff !important;
+      aspect-ratio: 1;
+      border-radius: 10%;
+    }
+
     table#man-heatmap td ul {
       padding: 0;
       margin: 0;
       display: grid;
       grid-template-columns: 1fr 1fr 1fr 1fr;
-      grid-gap: 5% 6%;
+      grid-gap: 3% 5%;
       list-style-type: none;
     }
 
@@ -65,20 +74,26 @@
       aspect-ratio: 1;
     }
 
-    table#man-heatmap td ul li a {
-      border-radius: 7%;
+    table#man-heatmap button {
+      cursor: pointer;
+      border-radius: 20% !important;
       width: 100%;
       height: 100%;
       aspect-ratio: 1;
-      padding: 20% 10% 10% 25%;
-      text-decoration: none;
       font-size: 100%;
     }
+    table#man-heatmap button.completed {background-color: #BEE5B0; border-color: #BEE5B0; color: #fff; }
+    table#man-heatmap button.failing {background-color: #FB6962; border-color: #FB6962; color: #fff; }
+    table#man-heatmap button.not-started {background-color: #fff; color: #AEAEAE; border-color: #fff; } 
+    table#man-heatmap button.rework {background-color: #FCFC99; color: #AEAEAE; border-color:  #FCFC99; }
 
-    table#man-heatmap a.completed:link, table#man-heatmap a.completed:visited {background-color: #BEE5B0; color: #fff; }
-    table#man-heatmap a.failing:link, table#man-heatmap a.failing:visited {background-color: #FB6962; color: #fff; }
-    table#man-heatmap a.not-started:link, table#man-heatmap a.not-started:visited {background-color: #fff; color: #AEAEAE; } 
-    table#man-heatmap a.rework:link, table#man-heatmap a.rework:visited {background-color: #FCFC99; color: #AEAEAE; }
+    table#man-heatmap button:hover {
+      filter: brightness(90%);
+      width: 93%;
+      height: 93%;
+      /* font-weight: bold; */
+    }
+    
 
 
 

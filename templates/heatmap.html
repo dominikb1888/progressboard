@@ -20,11 +20,11 @@
         {% for repo in users[name] %}
         {% if (repo['session'] | int) == outer_loop.index %}
         <li>
-          <a href={{repo.url}} class={{repo.status}}>
+          <button onclick="location.href='{{repo.url}}'" class={{repo.status}} type="button"  title={{repo.name}}>
             {{repo.exercise}}
-          </a>
-        {% endif %}
+          </button>
         </li>
+        {% endif %}
         {% endfor %}
       </ul>
       <!-- <span class='score'>{{ score }}%</span> -->
