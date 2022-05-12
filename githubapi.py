@@ -19,20 +19,20 @@ class GithubAPI:
         self.auth = HTTPBasicAuth(self.user, key)
         self.session = CachedSession(
             "leaderboard",
-            cache_control=True,  # Use Cache-Control response headers for expiration, if available
-            expire_after=timedelta(days=1),  # Otherwise expire responses after one day
-            allowable_codes=[
-                200,
-                400,
-            ],  # Cache 400 responses as a solemn reminder of your failures
-            allowable_methods=["GET", "POST"],  # Cache whatever HTTP methods you want
-            ignored_parameters=[
-                "api_key"
-            ],  # Don't match this request param, and redact if from the cache
-            match_headers=[
-                "Accept-Language"
-            ],  # Cache a different response per language
-            stale_if_error=True,  # In case of request errors, use stale cache data if possi
+            # cache_control=True,  # Use Cache-Control response headers for expiration, if available
+            # expire_after=timedelta(days=1),  # Otherwise expire responses after one day
+            # allowable_codes=[
+            #     200,
+            #     400,
+            # ],  # Cache 400 responses as a solemn reminder of your failures
+            # allowable_methods=["GET", "POST"],  # Cache whatever HTTP methods you want
+            # ignored_parameters=[
+            #     "api_key"
+            # ],  # Don't match this request param, and redact if from the cache
+            # match_headers=[
+            #     "Accept-Language"
+            # ],  # Cache a different response per language
+            # stale_if_error=True,  # In case of request errors, use stale cache data if possi
         )
 
         self.session.auth = self.auth
@@ -47,7 +47,9 @@ class GithubAPI:
             query_dict = parse_qs(urlparse(last_url).query)
             params = {k: v[0] for k, v in query_dict.items()}
             for i in range(2, int(params["page"]) + 1):
-                pages.append(self.session.get(f"{url}?page={i}").json())
+                response = self.session.get(f"{url}?page={i}")
+                print(response.url, response.from_cache)
+                pages.append(response.json())
 
         return self._flatten_results(pages, resource)
 
