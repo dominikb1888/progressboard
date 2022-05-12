@@ -19,8 +19,7 @@ class GithubAPI:
         self.auth = HTTPBasicAuth(self.user, key)
         self.session = CachedSession(
             "leaderboard",
-            # cache_control=True,  # Use Cache-Control response headers for expiration, if available
-            # expire_after=timedelta(days=1),  # Otherwise expire responses after one day
+            cache_control=True,  # Use Cache-Control response headers for expiration, if available
             # allowable_codes=[
             #     200,
             #     400,
@@ -40,15 +39,18 @@ class GithubAPI:
 
     def _get(self, type="", resource=""):
         url = f"{self.endpoint}/{type}/{resource}"
-        response = self.session.get(url)
+        response = self.session.get(url, expire_after=60)
+        if not response.from_cache:
+            print(response.url, response.from_cache)
         pages = [response.json()]
         if response.links.get("last"):
             last_url = response.links.get("last")["url"]
             query_dict = parse_qs(urlparse(last_url).query)
             params = {k: v[0] for k, v in query_dict.items()}
             for i in range(2, int(params["page"]) + 1):
-                response = self.session.get(f"{url}?page={i}")
-                print(response.url, response.from_cache)
+                response = self.session.get(f"{url}?page={i}", expire_after=600)
+                if not response.from_cache:
+                    print(response.url, response.from_cache)
                 pages.append(response.json())
 
         return self._flatten_results(pages, resource)
