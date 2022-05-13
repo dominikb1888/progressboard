@@ -1,22 +1,26 @@
 {% extends 'index.html' %}
 {% block content %}
-<div id="color-gradient">
+<div id="title-bar">
+  <h1>ProgressBoard</h1>
 </div>
+<div class="responsive-wrapper">
 <table id="man-heatmap">
   <tr class='header'>
-    <th class='color title'><a href='#'>Progress Board</a></th>
+    <th class='color title'></th>
     {% for session in plot_dict['data'][0]['x'] %}
     <th class='color session'><a href='#'>{{session}}</a></th>
     {% endfor %}
   </tr>
   {% for name in plot_dict['data'][0]['y'] %}
   <tr>
-    <th class='color name'><a href="#">{{name}}</a></th>
+    <th class='color name'><a href={{users[name][0]['html_url']}}><img src={{users[name][0]['avatar']}} alt={{name}}/></a>
+                            <a href={{users[name][0]['html_url']}}>{{name}}</a></th>
     {% for score in plot_dict['data'][0]['z'][loop.index-1] %}
     {% set color_code = (score/10 + 0.8) | int | round(0, 'floor') | int %}
     {% set outer_loop = loop %}
-    <td class='color color_{{ color_code }}'>
-      <ul>
+    <td>
+      <div class="responsive-wrapper">
+      <ul class='color color_{{ color_code }}'>
         {% for repo in users[name] %}
         {% if (repo['session'] | int) == outer_loop.index %}
         <li>
@@ -28,6 +32,7 @@
         {% endfor %}
       </ul>
       <!-- <span class='score'>{{ score }}%</span> -->
+      </div>
     </td>
     {% endfor %}
   </tr>
