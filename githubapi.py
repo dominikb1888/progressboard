@@ -48,7 +48,7 @@ class GithubAPI:
             query_dict = parse_qs(urlparse(last_url).query)
             params = {k: v[0] for k, v in query_dict.items()}
             for i in range(2, int(params["page"]) + 1):
-                response = self.session.get(f"{url}?page={i}", expire_after=600)
+                response = self.session.get(f"{url}?page={i}", expire_after=60)
                 if not response.from_cache:
                     print(response.url, response.from_cache)
                 pages.append(response.json())
