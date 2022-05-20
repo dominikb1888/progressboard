@@ -1,19 +1,9 @@
 from flask import Flask, abort, jsonify, render_template
-import flask_profiler
 from leaderboard import Leaderboard
 import json
 
 app = Flask(__name__)
 app.config["DEBUG"] = True
-
-# You need to declare necessary configuration to initialize
-# flask-profiler as follows:
-app.config["flask_profiler"] = {
-    "enabled": app.config["DEBUG"],
-    "storage": {"engine": "sqlite"},
-    "basicAuth": {"enabled": True, "username": "dominikb1888", "password": "4pFL2WWb"},
-    "ignore": ["^/static/.*"],
-}
 
 
 leaderboard = Leaderboard(org="DB-Teaching")
@@ -59,8 +49,6 @@ def api_user(user_name):
     request.headers.add("Access-Control-Allow-Origin", "*")
     return request
 
-
-flask_profiler.init_app(app)
 
 if __name__ == "__main__":
     app.run()
