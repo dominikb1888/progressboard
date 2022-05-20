@@ -2,13 +2,13 @@ from collections import defaultdict
 from dotenv import load_dotenv  # for python-dotenv method
 from githubapi import GithubAPI
 
-import json
+# import json
 import os
 import pandas as pd
 import re
 
-import plotly as plt
-import plotly.express as px
+# import plotly as plt
+# import plotly.express as px
 
 load_dotenv()  # for python-dotenv method
 
@@ -32,7 +32,7 @@ class Leaderboard:
 
     def get_users(self):
         users = [
-            user["login"]
+            user.get("login")
             for user in self.gh.get_org_resource(self.org, "outside_collaborators")
         ]
 
@@ -40,7 +40,7 @@ class Leaderboard:
         for repo in self.dataframe.to_dict(orient="records"):
             # if repo["user"]:
             for user in users:
-                if user == repo["user"]:
+                if user == repo.get("user"):
                     user_data[user].append(repo)
 
         return user_data
@@ -48,27 +48,27 @@ class Leaderboard:
     def get_table(self):
         df = []
         for repo in self.repos:
-            if repo["name"] in ["python", "github"]:
+            if repo.get("name") in ["python", "github"]:
                 continue
 
-            session, exercise = self._split_repo_name(repo["name"])
-            commits = self.gh.get_repo_resource(self.org, repo["name"], "commits")
+            session, exercise = self._split_repo_name(repo.get("name"))
+            commits = self.gh.get_repo_resource(self.org, repo.get("name"), "commits")
             user_name, user_avatar, user_link = (None, None, None)
             for user in self.gh.get_org_resource(self.org, "outside_collaborators"):
-                if user["login"] in repo["name"]:
-                    user_name = user["login"]
-                    user_link = user["html_url"]
-                    user_avatar = user["avatar_url"]
+                if user.get("login") in repo.get("name"):
+                    user_name = user.get("login")
+                    user_link = user.get("html_url")
+                    user_avatar = user.get("avatar_url")
 
             df.append(
                 {
                     "session": session,
                     "exercise": exercise,
-                    "name": repo["name"],
+                    "name": repo.get("name"),
                     "user": user_name if user_name else "dominikb1888",
                     "avatar": user_avatar,
                     "user_url": user_link,
-                    "url": repo["html_url"],
+                    "url": repo.get("html_url"),
                     "commits": len(commits),
                     "status": self.get_status(commits, repo),
                 }
@@ -83,24 +83,28 @@ class Leaderboard:
         """Returns the status of a repo based on workflow runs"""
         conclusions = []
         for commit in commits:
-            if commit["commit"]["author"]["name"] not in [
+            if commit.get("commit", {}).get("author", {}).get("name") not in [
                 "github-classroom[bot]",
                 "github-classroom",
             ]:
                 check_suite = self.gh.get_repo_commit_status(
-                    self.org, repo["name"], commit["sha"], "check-suites"
+                    self.org, repo.get("name"), commit.get("sha"), "check-suites"
                 )
-                if check_suite["total_count"] > 0:
-                    conclusions.append(check_suite["check_suites"][0]["conclusion"])
+                if check_suite.get("total_count") > 0:
+                    conclusions.append(
+                        check_suite.get("check_suites", {})[0].get("conclusion")
+                    )
 
         if len(conclusions) == 0:
             return "not-started"
 
-        workflows = self.gh.get_repo_resource(self.org, repo["name"], "actions/runs")
+        workflows = self.gh.get_repo_resource(
+            self.org, repo.get("name"), "actions/runs"
+        )
 
         if workflows:
             conclusions = [
-                (run["run_started_at"], run["conclusion"], repo["name"])
+                (run.get("run_started_at"), run.get("conclusion"), repo.get("name"))
                 for run in workflows
             ]
 
@@ -165,18 +169,18 @@ class Leaderboard:
 
         return rel
 
-    def _gen_plot(self):
-        rel = self.relative
+    # def _gen_plot(self):
+    #     rel = self.relative
 
-        fig = px.imshow(
-            rel.iloc[0:, 0:14],
-            color_continuous_scale=px.colors.sequential.Cividis_r,
-            text_auto=True,
-        )
-        # sns.heatmap(rel.iloc[1:, 0:14], annot=lb.iloc[1:, 0:14], cmap="YlGnBu")
+    #     fig = px.imshow(
+    #         rel.iloc[0:, 0:14],
+    #         color_continuous_scale=px.colors.sequential.Cividis_r,
+    #         text_auto=True,
+    #     )
+    #     # sns.heatmap(rel.iloc[1:, 0:14], annot=lb.iloc[1:, 0:14], cmap="YlGnBu")
 
-        fig.update_layout(width=1500, height=500)
-        return json.dumps(fig, cls=plt.utils.PlotlyJSONEncoder)
+    #     fig.update_layout(width=1500, height=500)
+    #     return json.dumps(fig, cls=plt.utils.PlotlyJSONEncoder)
 
     # def to_html(self):
     #     heatmap = self.heatmap()

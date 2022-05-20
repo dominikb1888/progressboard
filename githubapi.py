@@ -44,10 +44,10 @@ class GithubAPI:
             print(response.url, response.from_cache)
         pages = [response.json()]
         if response.links.get("last"):
-            last_url = response.links.get("last")["url"]
+            last_url = response.links.get("last", {}).get("url")
             query_dict = parse_qs(urlparse(last_url).query)
             params = {k: v[0] for k, v in query_dict.items()}
-            for i in range(2, int(params["page"]) + 1):
+            for i in range(2, int(params.get("page")) + 1):
                 response = self.session.get(f"{url}?page={i}", expire_after=60)
                 if not response.from_cache:
                     print(response.url, response.from_cache)
@@ -58,7 +58,7 @@ class GithubAPI:
     @staticmethod
     def _flatten_results(pages, resource):
         if resource == "actions/runs":
-            return [item for page in pages for item in page["workflow_runs"]]
+            return [item for page in pages for item in page.get("workflow_runs")]
 
         return [item for page in pages for item in page] if len(pages) > 1 else pages[0]
 
