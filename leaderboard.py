@@ -169,18 +169,18 @@ class Leaderboard:
 
         return rel
 
-    # def _gen_plot(self):
-    #     rel = self.relative
+    def _gen_plot(self):
+        rel = self.relative
 
-    #     fig = px.imshow(
-    #         rel.iloc[0:, 0:14],
-    #         color_continuous_scale=px.colors.sequential.Cividis_r,
-    #         text_auto=True,
-    #     )
-    #     # sns.heatmap(rel.iloc[1:, 0:14], annot=lb.iloc[1:, 0:14], cmap="YlGnBu")
+        fig = px.imshow(
+            rel.iloc[0:, 0:14],
+            color_continuous_scale=px.colors.sequential.Cividis_r,
+            text_auto=True,
+        )
+        # sns.heatmap(rel.iloc[1:, 0:14], annot=lb.iloc[1:, 0:14], cmap="YlGnBu")
 
-    #     fig.update_layout(width=1500, height=500)
-    #     return json.dumps(fig, cls=plt.utils.PlotlyJSONEncoder)
+        fig.update_layout(width=1500, height=500)
+        return json.dumps(fig, cls=plt.utils.PlotlyJSONEncoder)
 
     # def to_html(self):
     #     heatmap = self.heatmap()
