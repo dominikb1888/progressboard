@@ -2,13 +2,13 @@ from collections import defaultdict
 from dotenv import load_dotenv  # for python-dotenv method
 from githubapi import GithubAPI
 
-# import json
+import json
 import os
 import pandas as pd
 import re
 
-# import plotly as plt
-# import plotly.express as px
+import plotly as plt
+import plotly.express as px
 
 load_dotenv()  # for python-dotenv method
 
