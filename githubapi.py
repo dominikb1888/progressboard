@@ -20,18 +20,18 @@ class GithubAPI:
         self.session = CachedSession(
             "leaderboard",
             cache_control=True,  # Use Cache-Control response headers for expiration, if available
-            # allowable_codes=[
-            #     200,
-            #     400,
-            # ],  # Cache 400 responses as a solemn reminder of your failures
-            # allowable_methods=["GET", "POST"],  # Cache whatever HTTP methods you want
-            # ignored_parameters=[
-            #     "api_key"
-            # ],  # Don't match this request param, and redact if from the cache
-            # match_headers=[
-            #     "Accept-Language"
-            # ],  # Cache a different response per language
-            # stale_if_error=True,  # In case of request errors, use stale cache data if possi
+            allowable_codes=[
+                200,
+                400,
+            ],  # Cache 400 responses as a solemn reminder of your failures
+            allowable_methods=["GET", "POST"],  # Cache whatever HTTP methods you want
+            ignored_parameters=[
+                "api_key"
+            ],  # Don't match this request param, and redact if from the cache
+            match_headers=[
+                "Accept-Language"
+            ],  # Cache a different response per language
+            stale_if_error=True,  # In case of request errors, use stale cache data if possi
         )
 
         self.session.auth = self.auth
@@ -39,18 +39,16 @@ class GithubAPI:
 
     def _get(self, type="", resource=""):
         url = f"{self.endpoint}/{type}/{resource}"
-        response = self.session.get(url, expire_after=60)
-        if not response.from_cache:
-            print(response.url, response.from_cache)
+        response = self.session.get(url)
+        print(response.url, response.from_cache)
         pages = [response.json()]
         if response.links.get("last"):
             last_url = response.links.get("last", {}).get("url")
             query_dict = parse_qs(urlparse(last_url).query)
             params = {k: v[0] for k, v in query_dict.items()}
             for i in range(2, int(params.get("page")) + 1):
-                response = self.session.get(f"{url}?page={i}", expire_after=60)
-                if not response.from_cache:
-                    print(response.url, response.from_cache)
+                response = self.session.get(f"{url}?page={i}")
+                print(response.url, response.from_cache)
                 pages.append(response.json())
 
         return self._flatten_results(pages, resource)

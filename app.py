@@ -6,21 +6,21 @@ app = Flask(__name__)
 app.config["DEBUG"] = True
 
 
-leaderboard = Leaderboard(org="DB-Teaching")
+# leaderboard = Leaderboard(org="DB-Teaching")
 
 
 @app.route("/")
 def heatmap():
     return render_template(
         "heatmap.html",
-        plot_dict=json.loads(leaderboard.heatmap),
-        users=leaderboard.users,
+        user_repos=json.load(open("user_repos.json"))
+        # user_repos=leaderboard.user_repos,
     )
 
 
 @app.route("/api/v1/data")
 def api_data():
-    request = jsonify(leaderboard.dataframe.to_dict(orient="records"))
+    request = jsonify(leaderboard.data)
     request.headers.add("Access-Control-Allow-Origin", "*")
     return request
 
@@ -32,9 +32,9 @@ def api_repos():
     return request
 
 
-@app.route("/api/v1/users")
+@app.route("/api/v1/user_repos")
 def api_users():
-    request = jsonify(leaderboard.users)
+    request = jsonify(leaderboard.user_repos)
     request.headers.add("Access-Control-Allow-Origin", "*")
     return request
 
