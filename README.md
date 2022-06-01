@@ -66,4 +66,34 @@ cp _archive/leaderboard.py  .
 ```
 
 
+## The early ProgressBoard class
 
+```python
+import json
+from collections import Counter
+import requests as rq
+
+# Automatic Updates?!
+
+class ProgressBoard():
+  def __init__(self, res):
+    self.data = rq.get(f"https://api.github.com/{res}/repos").json()
+    self.names = [item['name'].split('-')[-1] for item in self.data]
+
+  def __repr__(self):
+    w = self._len_name() + 5
+    return f"{'NAME':{w}}{'COUNT':5}\n" + "\n".join([f"{n:{w}}{i:5}" for n, i in self.count()])
+  
+  def load_data(self, file):
+    with open(file) as json_file:
+      data = json.load(json_file)
+    return data
+
+  def _len_name(self):
+    return max([len(name) for name in self.names])
+
+  def count(self, limit = 32):
+    return Counter(self.names).most_common(limit)
+
+ProgressBoard('orgs/DB-Teaching')
+```

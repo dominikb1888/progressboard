@@ -1,20 +1,21 @@
 from flask import Flask, abort, jsonify, render_template
 from leaderboard import Leaderboard
+import requests as rq
 import json
 
 app = Flask(__name__)
 app.config["DEBUG"] = True
 
-
-# leaderboard = Leaderboard(org="DB-Teaching")
+# user_repos = json.load(open("user_repos.json"))
+leaderboard = Leaderboard(org="DB-Teaching")
+user_repos = leaderboard.user_repos
 
 
 @app.route("/")
 def heatmap():
     return render_template(
         "heatmap.html",
-        user_repos=json.load(open("user_repos.json"))
-        # user_repos=leaderboard.user_repos,
+        user_repos=user_repos,
     )
 
 
