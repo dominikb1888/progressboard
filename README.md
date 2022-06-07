@@ -22,12 +22,25 @@ Our Goal: Get a first draft of a working systems which retrieves, stores, transf
 
 ### Data Structure
 
-Let's brainstorm which fields we need!
+Let's brainstorm which fields we need now and which entities they are derived from to have data available now and later (v0.3)! 
+
+#### Fields for our Table
+
+#### Repos
+
+#### Commits
+
+#### Actions
 
 
 ### Data Retrieval
 
 How do we authenticate and store authenticated sessions safely?
+
+#### Python Environments, Environment Variables with requirements.txt and Dotenv
+
+#### Using Requests and a new Github Object to retrieve Data
+
 
 ### Data Storage
 
@@ -36,6 +49,20 @@ What are our options for storing our data and why?
 ### Data Transformation
 
 What can we do to prepare (aggregate) our data in view fitting to the Seaborn Heatmap?
+
+
+#### Seaborn Heatmap Requirements
+
+Documentation: https://seaborn.pydata.org/generated/seaborn.heatmap.html
+
+What's "Rectangular Data"?! Oh yeah, a dataframe. We have that :-) How to tweak it? 
+
+
+#### Pandas Pivot Table
+
+Documentation: https://pandas.pydata.org/docs/reference/api/pandas.pivot_table.html
+
+
 
 ### Data Visualization
 
