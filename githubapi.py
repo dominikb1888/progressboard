@@ -19,7 +19,7 @@ class GithubAPI:
         self.auth = HTTPBasicAuth(self.user, key)
         self.session = CachedSession(
             "leaderboard",
-            cache_control=True,  # Use Cache-Control response headers for expiration, if available
+            cache_control=False,  # Use Cache-Control response headers for expiration, if available
             allowable_codes=[
                 200,
                 400,
