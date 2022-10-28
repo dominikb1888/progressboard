@@ -1,5 +1,6 @@
 from requests.auth import HTTPBasicAuth
 from requests_cache import CachedSession
+from requests_cache import DO_NOT_CACHE
 from dotenv import load_dotenv
 from urllib.parse import urlparse, parse_qs
 from datetime import timedelta
@@ -17,21 +18,22 @@ class GithubAPI:
     ):
         self.user = user
         self.auth = HTTPBasicAuth(self.user, key)
+        base_url = endpoint + '/orgs/DB-Teaching'
+        urls_expire_after = {
+            base_url + '/repos': DO_NOT_CACHE,
+            base_url + '/outside_collaborators': DO_NOT_CACHE,
+            '*': 60,
+        }
         self.session = CachedSession(
             "leaderboard",
             cache_control=False,  # Use Cache-Control response headers for expiration, if available
-            allowable_codes=[
-                200,
-                400,
-            ],  # Cache 400 responses as a solemn reminder of your failures
+            allowable_codes=[200, 400],  # Cache 400 responses as a solemn reminder of your failures
             allowable_methods=["GET", "POST"],  # Cache whatever HTTP methods you want
-            ignored_parameters=[
-                "api_key"
-            ],  # Don't match this request param, and redact if from the cache
-            match_headers=[
-                "Accept-Language"
-            ],  # Cache a different response per language
+            ignored_parameters=["api_key"],  # Don't match this request param, and redact if from the cache
+            match_headers=True,
             stale_if_error=True,  # In case of request errors, use stale cache data if possi
+            stale_while_revalidate=True,
+            urls_expire_after=urls_expire_after,
         )
 
         self.session.auth = self.auth

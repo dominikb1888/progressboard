@@ -53,6 +53,7 @@ class Leaderboard:
             session, exercise = self._split_repo_name(repo.get("name"))
             commits = self.gh.get_repo_resource(self.org, repo.get("name"), "commits")
             user_name, user_avatar, user_link = (None, None, None)
+            commit_url, comment_count = self.get_latest_commit(commits)
 
             for user in self.users:
                 if user.get("login") in repo.get("name"):
@@ -62,15 +63,17 @@ class Leaderboard:
 
             df.append(
                 {
-                    "session": session,
-                    "exercise": exercise,
-                    "name": repo.get("name"),
-                    "user": user_name if user_name else "dominikb1888",
                     "avatar": user_avatar,
-                    "user_url": user_link,
-                    "url": repo.get("html_url"),
                     "commits": len(commits),
+                    "exercise": exercise,
+                    "latest_commit_comment_count": comment_count,
+                    "latest_commit_url": commit_url,
+                    "name": repo.get("name"),
+                    "session": session,
                     "status": self.get_status(commits, repo),
+                    "url": repo.get("html_url"),
+                    "user": user_name if user_name else "dominikb1888",
+                    "user_url": user_link,
                 }
             )
 
@@ -79,21 +82,32 @@ class Leaderboard:
         # df.to_csv("leaderboard.csv")
         return df
 
+    def filter_bot_commits(self, commits):
+        return [commit for commit in commits if commit.get("commit", {}).get("author", {}).get("name") not in [
+                "github-classroom[bot]",
+                "github-classroom",
+            ]]
+
+    def get_latest_commit(self, commits):
+        ordered_commits = sorted(self.filter_bot_commits(commits), key=lambda d: d['commit']['author']['date'])
+        if len(ordered_commits) > 0:
+            comment_count = ordered_commits[-1].get("comment_count", False)
+            return ordered_commits[-1]["html_url"], comment_count
+        else:
+            return False, False
+
+
     def get_status(self, commits, repo):
         """Returns the status of a repo based on workflow runs"""
         conclusions = []
-        for commit in commits:
-            if commit.get("commit", {}).get("author", {}).get("name") not in [
-                "github-classroom[bot]",
-                "github-classroom",
-            ]:
-                check_suite = self.gh.get_repo_commit_status(
+        for commit in self.filter_bot_commits(commits):
+            check_suite = self.gh.get_repo_commit_status(
                     self.org, repo.get("name"), commit.get("sha"), "check-suites"
                 )
-                if check_suite.get("total_count") > 0:
-                    conclusions.append(
-                        check_suite.get("check_suites", {})[0].get("conclusion")
-                    )
+            if check_suite.get("total_count") > 0:
+                conclusions.append(
+                    check_suite.get("check_suites", {})[0].get("conclusion")
+                )
 
         if len(conclusions) == 0:
             return "not-started"
