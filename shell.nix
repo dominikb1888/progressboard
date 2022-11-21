@@ -50,6 +50,7 @@ let
     python-dateutil
     python-dotenv
     pytz
+    # radon
     redis
     requests
     requests-cache

@@ -1,0 +1,17 @@
+{% extends 'index.html' %}
+{% block content %}
+<div id="title-bar">
+  <h1>UpdateBoard</h1>
+</div>
+<div class="responsive-wrapper">
+  <ul id="button_list">
+        {% for repo in repos %}
+        <li>
+          <button onclick="location.href='{{repo.latest_commit_url if repo.latest_commit_url else repo.url}}'" class={{repo.status}} type="button" style="background-image:url({{repo.avatar}})" title={{repo.name}}>
+            {{repo.session}}-{{repo.exercise}} {{repo.name}}
+          </button>
+        </li>
+        {% endfor %}
+      </ul>
+</div>
+{% endblock %}

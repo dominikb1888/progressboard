@@ -9,7 +9,7 @@ app.config["DEBUG"] = True
 # user_repos = json.load(open("user_repos.json"))
 leaderboard = Leaderboard(org="DB-Teaching")
 user_repos = leaderboard.user_repos
-
+repos = leaderboard.repos
 
 @app.route("/")
 def heatmap():
@@ -17,6 +17,14 @@ def heatmap():
         "heatmap.html",
         user_repos=user_repos,
     )
+
+@app.route("/updates")
+def updates():
+    return render_template(
+        "list.html",
+        repos=repos,
+    )
+
 
 
 @app.route("/api/v1/data")

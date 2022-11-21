@@ -26,7 +26,7 @@ class GithubAPI:
         }
         self.session = CachedSession(
             "leaderboard",
-            cache_control=False,  # Use Cache-Control response headers for expiration, if available
+            cache_control=True,  # Use Cache-Control response headers for expiration, if available
             allowable_codes=[200, 400],  # Cache 400 responses as a solemn reminder of your failures
             allowable_methods=["GET", "POST"],  # Cache whatever HTTP methods you want
             ignored_parameters=["api_key"],  # Don't match this request param, and redact if from the cache
@@ -39,7 +39,7 @@ class GithubAPI:
         self.session.auth = self.auth
         self.endpoint = endpoint
 
-    def _get(self, type="", resource=""):
+    def _get(self, type="", resource="", query=""):
         url = f"{self.endpoint}/{type}/{resource}"
         response = self.session.get(url)
         print(response.url, response.from_cache)
@@ -72,3 +72,6 @@ class GithubAPI:
 
     def get_repo_commit_status(self, org, repo, ref, resource):
         return self._get(f"repos/{org}/{repo}/commits/{ref}", resource)
+
+    def get_repo_commit_file(self, org, repo, file, ref):
+        return self._get(f"repos/{org}/{repo}/contents/{file}", query=ref)
