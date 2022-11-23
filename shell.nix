@@ -69,8 +69,10 @@ let
 in pkgs.mkShell {
   buildInputs = with pkgs; [
     pythonEnv
-
+    redis
+    heroku
     # keep this line if you use bash
     pkgs.bashInteractive
   ];
 }
+

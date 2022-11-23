@@ -104,7 +104,7 @@ class Leaderboard:
             check_suite = self.gh.get_repo_commit_status(
                     self.org, repo.get("name"), commit.get("sha"), "check-suites"
                 )
-            if check_suite.get("total_count") > 0:
+            if check_suite.get("total_count", 0) > 0:
                 conclusions.append(
                     check_suite.get("check_suites", {})[0].get("conclusion")
                 )
