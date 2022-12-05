@@ -50,7 +50,7 @@ let
     python-dateutil
     python-dotenv
     pytz
-    # radon
+    python-lzf
     redis
     requests
     requests-cache
@@ -70,7 +70,7 @@ in pkgs.mkShell {
   buildInputs = with pkgs; [
     pythonEnv
     redis
-    heroku
+    rdbtools
     # keep this line if you use bash
     pkgs.bashInteractive
   ];
