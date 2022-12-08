@@ -28,7 +28,7 @@ class GithubAPI:
         self.session = CachedSession(
             "leaderboard",
             backend = backend,
-            #cache_control=False,  # Use Cache-Control response headers for expiration, if available
+            cache_control=False,  # Use Cache-Control response headers for expiration, if available
             allowable_codes=[200, 400],  # Cache 400 responses as a solemn reminder of your failures
             allowable_methods=["GET", "POST"],  # Cache whatever HTTP methods you want
             ignored_parameters=["api_key"],  # Don't match this request param, and redact if from the cache
