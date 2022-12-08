@@ -1,99 +1,17 @@
-# Building a Restful Web Application
+# Building this App with Github Codespaces
 
-## Create a new branch in the repo
+Click on the green Code top right and create a new devcontainer and wait for the system to load and boot up, VS code editor will pop up. Use the terminal in the bottom for all further steps
 
-After moving all old files to our '_archive' directory, we create new branch in our existing repo called 'app' and commit the blank status.
+1. Activate the environment:
 
-```bash
-git commit -am 'initial, moved old files to separate dir'
-git checkout app
-git branch app
-```
+        lorri shell
 
-## Create a Python virtualenv and activate it
+2. Start redis by typing
 
-```bash
-python3 -m venv app
+        redis-server --daemonize yes
 
-. app/bin/activate.fish
-source app/bin/activate
-```
+3. Run flask
 
-## Install dependencies and list them in requirements.txt
+        flask run
 
-```bash
-pip install pandas flask seaborn virtualenv pygithub python-dotenv
-
-pip freeze > requirements.txt
-```
-
-## Create Flask app
-
-Create a new app.y file and launch it:
-
-```bash
-vim app.py
-```
-
-Add the boilerplate code showing Hello World:
-
-```python
-from flask import Flask
-app = Flask(__name__)
-
-@app.route("/")
-def hello():
-  return "Hello World!"
-
-if __name__ == "__main__":
-  app.run()
-```
-
-Commit the first version without much functionality
-
-```bash
-git commit -am 'initial webapp with flask boilerplate'
-```
-
-
-## Add the leaderboard class
-
-```bash
-git commit -am 'added first version of Leaderboard class'
-git add leaderboard.py
-
-cp _archive/leaderboard.py  .
-```
-
-
-## The early ProgressBoard class
-
-```python
-import json
-from collections import Counter
-import requests as rq
-
-# Automatic Updates?!
-
-class ProgressBoard():
-  def __init__(self, res):
-    self.data = rq.get(f"https://api.github.com/{res}/repos").json()
-    self.names = [item['name'].split('-')[-1] for item in self.data]
-
-  def __repr__(self):
-    w = self._len_name() + 5
-    return f"{'NAME':{w}}{'COUNT':5}\n" + "\n".join([f"{n:{w}}{i:5}" for n, i in self.count()])
-  
-  def load_data(self, file):
-    with open(file) as json_file:
-      data = json.load(json_file)
-    return data
-
-  def _len_name(self):
-    return max([len(name) for name in self.names])
-
-  def count(self, limit = 32):
-    return Counter(self.names).most_common(limit)
-
-ProgressBoard('orgs/DB-Teaching')
-```
+Flask will then probe the redis cache and spin up the app once done. You can click on the link (<http://localhost:5000>) that shows up in the terminal window. A new browser window should open showing the output of the app.
