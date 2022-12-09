@@ -9,8 +9,7 @@
     "cpus": 4
   },
   "waitFor": "onCreateCommand",
-  "userEnvProbe": "loginInteractiveShell",
-  "updateContentCommand": "lorri shell;redis-server --daemonize yes",
+  "updateContentCommand": "",
   "postCreateCommand": "",
   "postAttachCommand": {
     "server": "flask run"
