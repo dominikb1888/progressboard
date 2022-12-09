@@ -10,9 +10,9 @@
   },
   "waitFor": "onCreateCommand",
   "updateContentCommand": "",
-  "postCreateCommand": "",
+  "postStartCommand": "lorri shell && redis-server --daemonize yes",
   "postAttachCommand": {
-    "server": "lorri shell && redis-server --daemonize yes && flask run"
+    "server": "flask run"
   },
   "portsAttributes": {
     "5000": {
