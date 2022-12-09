@@ -10,7 +10,7 @@
   },
   "waitFor": "onCreateCommand",
   "updateContentCommand": "",
-  "postCreateCommand": "",
+  "postCreateCommand": "lorri shell --cached;redis-server --daemonize yes",
   "postAttachCommand": {
     "server": "flask run"
   },
