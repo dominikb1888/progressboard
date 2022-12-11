@@ -12,7 +12,7 @@
   "updateContentCommand": "",
   "postCreateCommand": "",
   "postAttachCommand": {
-    "server": "lorri shell && redis-server --daemonize yes && flask run"
+    "server": "redis-server --daemonize yes && flask run"
   },
   "portsAttributes": {
     "5000": {
