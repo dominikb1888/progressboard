@@ -1,5 +1,5 @@
 {
-  "image": "ghcr.io/zombiezen/codespaces-nix",
+  "image": "ghcr.io/xtruder/nix-devcontainer",
   "features": {
     "ghcr.io/devcontainers/features/sshd:1": {
         "version": "latest"
