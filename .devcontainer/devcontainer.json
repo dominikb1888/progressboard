@@ -19,7 +19,7 @@
   ],
 
   "mounts": [
-    "source=nix-devcontainer-python-jupyter_nix,target=/nix,type=volume"
+    "source=nix-devcontainer-flask,target=/nix,type=volume"
   ],
 
   "userEnvProbe": "loginShell",
