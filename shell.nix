@@ -1,4 +1,4 @@
-{ config, lib, pkgs ? import <nixpkgs> {} }:
+{ pkgs ? import <nixpkgs> {} }:
 
 let
   pythonEnv = with pkgs.python310Packages; [
