@@ -1,4 +1,8 @@
-{ pkgs ? import <nixpkgs> {} }:
+{ config, lib, pkgs ? import <nixpkgs> {} }:
+
+programs.fish.enable = true;
+programs.neovim.enable = true;
+programs.starship.enable = true;
 
 let
   pythonEnv = with pkgs.python310Packages; [
@@ -71,8 +75,10 @@ in pkgs.mkShell {
     pythonEnv
     redis
     rdbtools
+    fd
+    ripgrep
     # keep this line if you use bash
-    pkgs.bashInteractive
+    # pkgs.bashInteractive
   ];
 }
 
