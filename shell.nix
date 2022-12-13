@@ -73,8 +73,6 @@ in pkgs.mkShell {
     rdbtools
     fd
     ripgrep
-    # keep this line if you use bash
-    pkgs.bashInteractive
     fish
     neovim
     starship
