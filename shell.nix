@@ -74,7 +74,7 @@ in pkgs.mkShell {
     fd
     ripgrep
     # keep this line if you use bash
-    # pkgs.bashInteractive
+    pkgs.bashInteractive
     fish
     neovim
     starship
