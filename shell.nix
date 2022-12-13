@@ -71,8 +71,6 @@ in pkgs.mkShell {
     pythonEnv
     redis
     rdbtools
-    fd
-    ripgrep
   ];
 }
 
