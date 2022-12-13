@@ -73,9 +73,6 @@ in pkgs.mkShell {
     rdbtools
     fd
     ripgrep
-    fish
-    neovim
-    starship
   ];
 }
 
