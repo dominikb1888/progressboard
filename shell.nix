@@ -1,9 +1,5 @@
 { config, lib, pkgs ? import <nixpkgs> {} }:
 
-programs.fish.enable = true;
-programs.neovim.enable = true;
-programs.starship.enable = true;
-
 let
   pythonEnv = with pkgs.python310Packages; [
     ipython
@@ -79,6 +75,9 @@ in pkgs.mkShell {
     ripgrep
     # keep this line if you use bash
     # pkgs.bashInteractive
+    fish
+    neovim
+    starship
   ];
 }
 
