@@ -1,4 +1,4 @@
-# ProgressBoard
+# Progress Board
 
 ## Open this App with Github Codespaces
 
