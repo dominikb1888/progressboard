@@ -2,6 +2,8 @@
 
 ## Building this App with Github Codespaces
 
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=552555575)
+
 Click on the green Code top right and create a new devcontainer and wait for the system to load and boot up, VS code editor will pop up. Use the terminal in the bottom for all further steps
 
 1. Activate the environment (based on the shell.nix file):
