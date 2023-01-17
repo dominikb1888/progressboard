@@ -1,0 +1,39 @@
+{% extends 'index.html' %}
+{% block content %}
+<div id="title-bar">
+  <h1>ProgressBoard - Semester {{semester}} </h1>
+</div>
+<div class="responsive-wrapper">
+<table id="man-heatmap">
+  <tr class='header'>
+    <th class='color title'></th>
+    {% for session in range(1,16) %}
+    <th class='color session'><a href='#'>{{session}}</a></th>
+    {% endfor %}
+  </tr>
+  {% for user, repos in user_repos.items() %}
+  <tr>
+    <th class='color name'><a href='https://github.com/{{repos[0]['user']}}'><img src={{repos[0]['avatar']}} alt={{repos[0]['user']}}/></a>
+                            <a href='https://github.com/{{repos[0]['user']}}'>{{repos[0]['user']}}</a></th>
+    {% for session in range(1,16) %}
+    {% set outer_loop = loop %}
+    <td>
+      <div class="responsive-wrapper">
+      <ul class='color'>
+        {% for repo in repos %}
+        {% if (repo['session'] | int) == outer_loop.index %}
+        <li>
+          <button onclick="location.href='{{repo.latest_commit_url if repo.latest_commit_url else repo.url}}'" class={{repo.status}} type="button"  title={{repo.name}}>
+            {{repo.exercise}}
+          </button>
+        </li>
+        {% endif %}
+        {% endfor %}
+      </ul>
+      </div>
+    </td>
+    {% endfor %}
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}

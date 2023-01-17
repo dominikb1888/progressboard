@@ -1,5 +1,6 @@
 from flask import Flask, request, json, abort, jsonify, render_template
 from leaderboard import Leaderboard
+from collections import defaultdict
 import requests as rq
 import json
 
@@ -10,6 +11,7 @@ app.config["DEBUG"] = True
 leaderboard = Leaderboard(org="DB-Teaching")
 user_repos = leaderboard.user_repos
 repos = leaderboard.repos
+data = leaderboard.data
 
 @app.route("/")
 def heatmap():
@@ -17,6 +19,20 @@ def heatmap():
         "heatmap.html",
         user_repos=user_repos,
     )
+
+@app.route("/semester/<string:semester>")
+def heatmap_semester(semester):
+    semester_data = {'22W': ["1990Flori", "AKHILB007"], '22S': ["Aleksar05", "Alexandra18636"]} # Make this importable from a file
+    users = semester_data[semester]
+
+    return render_template(
+        "heatmap_semester.html",
+        user_repos = {user:user_repos[user] for user in users},
+        semester = semester
+    )
+
+
+
 
 @app.route("/updates")
 def updates():
@@ -29,21 +45,35 @@ def updates():
 
 @app.route("/api/v1/data")
 def api_data():
-    request = jsonify(leaderboard.data)
+    request = jsonify(data)
     request.headers.add("Access-Control-Allow-Origin", "*")
     return request
 
 
 @app.route("/api/v1/repos")
 def api_repos():
-    request = jsonify(leaderboard.repos)
+    request = jsonify(repos)
     request.headers.add("Access-Control-Allow-Origin", "*")
     return request
 
 
 @app.route("/api/v1/user_repos")
 def api_users():
-    request = jsonify(leaderboard.user_repos)
+    request = jsonify(user_repos)
+    request.headers.add("Access-Control-Allow-Origin", "*")
+    return request
+
+
+@app.route("/api/v1/user_repos/<string:semester>")
+def api_users_semester(semester):
+    semester_data = {'22W': ["1990Flori", "AKHILB007"], '22S': ["Aleksar05", "Alexandra18636"]} # Make this importable from a file
+
+    if semester in semester_data.keys():
+        users = semester_data[semester]
+    else:
+        abort(404)
+
+    request = jsonify({user:user_repos[user] for user in users})
     request.headers.add("Access-Control-Allow-Origin", "*")
     return request
 
