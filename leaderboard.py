@@ -17,10 +17,10 @@ load_dotenv()  # for python-dotenv method
 class Leaderboard:
     def __init__(
         self,
-        user=os.environ.get("GHUSER", "dominikb1888"),
+        user=os.environ.get("GHUSER", "dominikb1888"), # use environment to change the user
         key=os.environ.get("GHTOKEN"),
         endpoint="https://api.github.com",
-        org=os.environ.get("GHORG", "DB-Teaching"),
+        org=os.environ.get("GHORG", "DB-Teaching"), # use environment to change the organization
     ):
         self.gh = GithubAPI(user, key, endpoint)
         self.org = org
@@ -55,7 +55,7 @@ class Leaderboard:
             user_name, user_avatar, user_link = (None, None, None)
             commit_url, comment_count = self.get_latest_commit(commits)
 
-            repo['commits'] = commits
+            repo['commits'] = commits # Add commits array to repo data
 
             for user in self.users:
                 if user.get("login") in repo.get("name"):
@@ -76,7 +76,7 @@ class Leaderboard:
                     "url": repo.get("html_url"),
                     "user": user_name if user_name else "dominikb1888",
                     "user_url": user_link,
-                    'commits': commits,
+                    'commits': commits, # Add commits array to table
                 }
             )
 
@@ -107,7 +107,7 @@ class Leaderboard:
             check_suite = self.gh.get_repo_commit_status(
                     self.org, repo.get("name"), commit.get("sha"), "check-suites"
                 )
-            if isinstance(check_suite, dict) and check_suite.get("total_count", 0) > 0:
+            if isinstance(check_suite, dict) and check_suite.get("total_count", 0) > 0: # sometime check_suite can be an array, only run this if statement, if it's a dict
                 conclusions.append(
                     check_suite.get("check_suites", {})[0].get("conclusion")
                 )

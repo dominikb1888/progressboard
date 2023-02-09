@@ -9,18 +9,18 @@ app = Flask(__name__)
 app.config["DEBUG"] = True
 
 # user_repos = json.load(open("user_repos.json"))
-semester_data = json.load(open("dumps/semester_data.json"))
+semester_data = json.load(open("dumps/semester_data.json")) # Move semester_data to an importable file
 leaderboard = Leaderboard()
 user_repos = leaderboard.user_repos
 repos = leaderboard.repos
 data = leaderboard.data
 
-def filtered_commits(commits, lte, gte):
+def filtered_commits(commits, lte, gte): # Filter the commits list to get all the commits after gte and before lte
     ret = commits
     if lte is not None:
-        ret = [commit for commit in commits if lte > datetime.strptime(commit['commit']['author']['date'], "%Y-%m-%dT%H:%M:%SZ")]
+        ret = [commit for commit in commits if lte > datetime.strptime(commit['commit']['author']['date'], "%Y-%m-%dT%H:%M:%SZ")] # filter all the commits that are after lte
     if gte is not None:
-        ret = [commit for commit in commits if gte < datetime.strptime(commit['commit']['author']['date'], "%Y-%m-%dT%H:%M:%SZ")]
+        ret = [commit for commit in commits if gte < datetime.strptime(commit['commit']['author']['date'], "%Y-%m-%dT%H:%M:%SZ")] # filter all the commits that are before gte
     return ret
 
 
@@ -38,26 +38,36 @@ def heatmap():
     print(filtered_items)
     if end_date:
         val = datetime.strptime(end_date, '%Y-%m-%d')
-        filtered_items = {key: [
-            {**item, 'commits': filtered_commits(item['commits'], val, None) } for item in values 
-            if len(filtered_commits(item['commits'], val, None)) > 0
-            ] for key, values in filtered_items.items() }
-        filtered_items = {key: values for key, values in filtered_items.items() if len(values) > 0 }
+        filtered_items = {key: [ # every user
+            {
+                **item, # Use the repo data and update the following fields
+                'commits': filtered_commits(item['commits'], val, None) # remove all commits that are not inside the timeframe
+            } for item in values # loop over repos
+            if len(filtered_commits(item['commits'], val, None)) > 0 # only keep the repo if it has at least one commit in this time frame
+            ] 
+            for key, values in filtered_items.items() # for every user loop over repos
+        } 
+        filtered_items = {key: values for key, values in filtered_items.items() if len(values) > 0 } # remove users that don't have any active repos
     
     if start_date:
         val = datetime.strptime(start_date, '%Y-%m-%d')
-        filtered_items = {key: [
-            {**item, 'commits': filtered_commits(item['commits'], None, val) } for item in values 
-            if len(filtered_commits(item['commits'], None, val)) > 0
-            ] for key, values in filtered_items.items() }
-        filtered_items = {key: values for key, values in filtered_items.items() if len(values) > 0 }
+        filtered_items = {key: [ # every user
+            {
+                **item, # Use the repo data and update the following fields
+                'commits': filtered_commits(item['commits'], None, val) # remove all commits that are not inside the timeframe
+            } for item in values 
+            if len(filtered_commits(item['commits'], None, val)) > 0 # only keep the repo if it has at least one commit in this time frame
+            ] 
+            for key, values in filtered_items.items() # for every user loop over repos
+        }
+        filtered_items = {key: values for key, values in filtered_items.items() if len(values) > 0 } # remove users that don't have any active repos
     print(filtered_items)
     
     return render_template(
         "heatmap.html",
         user_repos=filtered_items,
-        start_date=start_date if start_date else "",
-        end_date=end_date if end_date else "",
+        start_date=start_date if start_date else "", # return filter data so jinja can auto fill them
+        end_date=end_date if end_date else "", # return filter data so jinja can auto fill them
     )
 
 @app.route("/semester/<string:semester>")
@@ -85,23 +95,29 @@ def updates():
     if end_date:
         val = datetime.strptime(end_date, '%Y-%m-%d')
         filtered_items = [
-            {**item, 'commits': filtered_commits(item['commits'], val, None) } for item in filtered_items 
-            if len(filtered_commits(item['commits'], val, None)) > 0
+            {
+                **item, # Use the repo data and update the following fields
+                'commits': filtered_commits(item['commits'], val, None)  # remove commits that are outside of the timeframe
+            } for item in filtered_items  # loop over all repos
+            if len(filtered_commits(item['commits'], val, None)) > 0 # only keep the repos that have active commits 
         ] 
     
     if start_date:
         val = datetime.strptime(start_date, '%Y-%m-%d')
         filtered_items = [
-            {**item, 'commits': filtered_commits(item['commits'], None, val) } for item in filtered_items 
-            if len(filtered_commits(item['commits'], None, val)) > 0
+            {
+                **item, # Use the repo data and update the following fields
+                'commits': filtered_commits(item['commits'], None, val) # remove commits that are outside of the timeframe
+            } for item in filtered_items # loop over all repos
+            if len(filtered_commits(item['commits'], None, val)) > 0 # only keep the repos that have active commits 
         ]
     
 
     return render_template(
         "list.html",
         repos=filtered_items,
-        start_date=start_date if start_date else "",
-        end_date=end_date if end_date else "",
+        start_date=start_date if start_date else "", # return filter data so jinja can auto fill them
+        end_date=end_date if end_date else "", # return filter data so jinja can auto fill them
     )
 
 
