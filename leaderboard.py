@@ -17,10 +17,10 @@ load_dotenv()  # for python-dotenv method
 class Leaderboard:
     def __init__(
         self,
-        user="dominikb1888",
+        user=os.environ.get("GHUSER", "dominikb1888"),
         key=os.environ.get("GHTOKEN"),
         endpoint="https://api.github.com",
-        org="DB-Teaching",
+        org=os.environ.get("GHORG", "DB-Teaching"),
     ):
         self.gh = GithubAPI(user, key, endpoint)
         self.org = org
@@ -55,6 +55,8 @@ class Leaderboard:
             user_name, user_avatar, user_link = (None, None, None)
             commit_url, comment_count = self.get_latest_commit(commits)
 
+            repo['commits'] = commits
+
             for user in self.users:
                 if user.get("login") in repo.get("name"):
                     user_name = user["login"]
@@ -74,6 +76,7 @@ class Leaderboard:
                     "url": repo.get("html_url"),
                     "user": user_name if user_name else "dominikb1888",
                     "user_url": user_link,
+                    'commits': commits,
                 }
             )
 
@@ -104,7 +107,7 @@ class Leaderboard:
             check_suite = self.gh.get_repo_commit_status(
                     self.org, repo.get("name"), commit.get("sha"), "check-suites"
                 )
-            if check_suite.get("total_count", 0) > 0:
+            if isinstance(check_suite, dict) and check_suite.get("total_count", 0) > 0:
                 conclusions.append(
                     check_suite.get("check_suites", {})[0].get("conclusion")
                 )
