@@ -4,15 +4,16 @@
   <h1>ProgressBoard</h1>
 </div>
 
+<!-- Send Get request to the same page to get the filtered results -->
 <form method="get" class="flex-row justify-center" id="filter-form">
   <div class="flex-col form-input">
     <label for="start_date">Updated after</label>
-    <input placeholder="YYYY-mm-dd" id="start_date" name="start_date" value="{{start_date}}" />
+    <input type="date" placeholder="YYYY-mm-dd" id="start_date" name="start_date" value="{{start_date}}" />
   </div>
 
   <div class="flex-col form-input">
     <label for="end_date">Updated before</label>
-    <input placeholder="YYYY-mm-dd" id="end_date" name="end_date" value="{{end_date}}" />
+    <input type="date" placeholder="YYYY-mm-dd" id="end_date" name="end_date" value="{{end_date}}" />
   </div>
 <div class="flex-row items-end">
 <button class="btn">Filter results</button>

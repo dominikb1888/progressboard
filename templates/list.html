@@ -4,10 +4,12 @@
   <h1>UpdateBoard</h1>
 </div>
 
+<!-- Send Get request to the same page to get the filtered results -->
 <form method="get" class="flex-row justify-center" id="filter-form">
   <div class="flex-col form-input">
     <label for="start_date">Updated after</label>
     <input
+      type="date" 
       placeholder="YYYY-mm-dd"
       id="start_date"
       name="start_date"
@@ -18,6 +20,7 @@
   <div class="flex-col form-input">
     <label for="end_date">Updated before</label>
     <input
+      type="date" 
       placeholder="YYYY-mm-dd"
       id="end_date"
       name="end_date"
