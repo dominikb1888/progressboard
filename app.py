@@ -3,7 +3,7 @@ from leaderboard import Leaderboard
 from collections import defaultdict
 import requests as rq
 import json
-from datetime import datetime
+from datetime import datetime, timedelta
 
 app = Flask(__name__)
 app.config["DEBUG"] = True
@@ -15,14 +15,22 @@ user_repos = leaderboard.user_repos
 repos = leaderboard.repos
 data = leaderboard.data
 
-def filtered_commits(commits, lte, gte): # Filter the commits list to get all the commits after gte and before lte
+
+def filtered_commits(commits, lte, gte):
     ret = commits
     if lte is not None:
-        ret = [commit for commit in commits if lte > datetime.strptime(commit['commit']['author']['date'], "%Y-%m-%dT%H:%M:%SZ")] # filter all the commits that are after lte
+        ret = [commit for commit in ret if lte + timedelta(days=1) >= datetime.strptime(commit['commit']['author']['date'], "%Y-%m-%dT%H:%M:%SZ")] # filter all the commits that are after lte
     if gte is not None:
-        ret = [commit for commit in commits if gte < datetime.strptime(commit['commit']['author']['date'], "%Y-%m-%dT%H:%M:%SZ")] # filter all the commits that are before gte
+        ret = [commit for commit in ret if gte <= datetime.strptime(commit['commit']['author']['date'], "%Y-%m-%dT%H:%M:%SZ")] # filter all the commits that are before gte
     return ret
 
+
+def filtered_repos(repos, lte, gte):
+    return [
+        repo for repo in [
+            {**item, 'commits': filtered_commits(item['commits'], lte, gte) } for item in repos 
+        ] if len(repo['commits']) > 0 # only keep the repos with at least one commit
+    ]
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -35,33 +43,15 @@ def heatmap():
         end_date = request.args.get("end_date")
     
     filtered_items = user_repos
-    print(filtered_items)
+
+    lte, gte = None, None
     if end_date:
-        val = datetime.strptime(end_date, '%Y-%m-%d')
-        filtered_items = {key: [ # every user
-            {
-                **item, # Use the repo data and update the following fields
-                'commits': filtered_commits(item['commits'], val, None) # remove all commits that are not inside the timeframe
-            } for item in values # loop over repos
-            if len(filtered_commits(item['commits'], val, None)) > 0 # only keep the repo if it has at least one commit in this time frame
-            ] 
-            for key, values in filtered_items.items() # for every user loop over repos
-        } 
-        filtered_items = {key: values for key, values in filtered_items.items() if len(values) > 0 } # remove users that don't have any active repos
-    
+        lte = datetime.strptime(end_date, '%Y-%m-%d')    
     if start_date:
-        val = datetime.strptime(start_date, '%Y-%m-%d')
-        filtered_items = {key: [ # every user
-            {
-                **item, # Use the repo data and update the following fields
-                'commits': filtered_commits(item['commits'], None, val) # remove all commits that are not inside the timeframe
-            } for item in values 
-            if len(filtered_commits(item['commits'], None, val)) > 0 # only keep the repo if it has at least one commit in this time frame
-            ] 
-            for key, values in filtered_items.items() # for every user loop over repos
-        }
-        filtered_items = {key: values for key, values in filtered_items.items() if len(values) > 0 } # remove users that don't have any active repos
-    print(filtered_items)
+        gte = datetime.strptime(start_date, '%Y-%m-%d')
+
+    filtered_items = {key: filtered_repos(values, lte, gte) for key, values in filtered_items.items() }
+    filtered_items = {key: values for key, values in filtered_items.items() if len(values) > 0 } # only keep the users with at least one commit
     
     return render_template(
         "heatmap.html",
@@ -92,25 +82,13 @@ def updates():
     filtered_items = repos
 
 
+    lte, gte = None, None
     if end_date:
-        val = datetime.strptime(end_date, '%Y-%m-%d')
-        filtered_items = [
-            {
-                **item, # Use the repo data and update the following fields
-                'commits': filtered_commits(item['commits'], val, None)  # remove commits that are outside of the timeframe
-            } for item in filtered_items  # loop over all repos
-            if len(filtered_commits(item['commits'], val, None)) > 0 # only keep the repos that have active commits 
-        ] 
-    
+        lte = datetime.strptime(end_date, '%Y-%m-%d')
     if start_date:
-        val = datetime.strptime(start_date, '%Y-%m-%d')
-        filtered_items = [
-            {
-                **item, # Use the repo data and update the following fields
-                'commits': filtered_commits(item['commits'], None, val) # remove commits that are outside of the timeframe
-            } for item in filtered_items # loop over all repos
-            if len(filtered_commits(item['commits'], None, val)) > 0 # only keep the repos that have active commits 
-        ]
+        gte = datetime.strptime(start_date, '%Y-%m-%d')
+
+    filtered_items = filtered_repos(filtered_items, lte, gte)
     
 
     return render_template(
