@@ -55,7 +55,6 @@ let
     requests
     requests-cache
     scipy
-    seaborn
     simplejson
     six
     tenacity

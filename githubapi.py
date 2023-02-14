@@ -41,9 +41,14 @@ class GithubAPI:
         self.session.auth = self.auth
         self.endpoint = endpoint
 
+    @staticmethod
+    def _rate_limit_exceeded(headers):
+        return True
+
     def _get(self, type="", resource="", query=""):
         url = f"{self.endpoint}/{type}/{resource}"
         response = self.session.get(url)
+        # if not self._rate_limit_exceeded(response.headers):
         print(response.url, response.from_cache)
         pages = [response.json()]
         if response.links.get("last"):

@@ -1,18 +1,11 @@
 from collections import defaultdict
-from dotenv import load_dotenv  # for python-dotenv method
+from datetime import datetime
+import os
+import re
+from dotenv import load_dotenv
 from githubapi import GithubAPI
 
-# import json
-import os
-
-# import pandas as pd
-import re
-
-# import plotly as plt
-# import plotly.express as px
-
 load_dotenv()  # for python-dotenv method
-
 
 class Leaderboard:
     def __init__(
@@ -29,9 +22,6 @@ class Leaderboard:
             user for user in self.gh.get_org_resource(self.org, "outside_collaborators")
         ]
         self.data = self._get_table()
-        # self.leaderboard = self._gen_heatmap_abs()
-        # self.relative = self._gen_heatmap_rel()
-        # self.heatmap = self._gen_plot()
 
     @property
     def user_repos(self):
@@ -43,6 +33,14 @@ class Leaderboard:
                     user_data[user.get("login")].append(repo)
 
         return user_data
+
+    @property
+    def times(self):
+        return [
+            datetime.strptime(commit['commit']['author']['date'], "%Y-%m-%dT%H:%M:%SZ")
+            for repo in self.data for commit in repo['commits']
+        ]
+
 
     def _get_table(self):
         df = []
@@ -80,9 +78,6 @@ class Leaderboard:
                 }
             )
 
-        # df = pd.DataFrame(df)
-        # df = df.sort_values(by=["name"])
-        # df.to_csv("leaderboard.csv")
         return df
 
     def filter_bot_commits(self, commits):
@@ -107,7 +102,7 @@ class Leaderboard:
             check_suite = self.gh.get_repo_commit_status(
                     self.org, repo.get("name"), commit.get("sha"), "check-suites"
                 )
-            if isinstance(check_suite, dict) and check_suite.get("total_count", 0) > 0: # sometime check_suite can be an array, only run this if statement, if it's a dict
+            if isinstance(check_suite, dict) and check_suite.get("total_count", 0) > 0:
                 conclusions.append(
                     check_suite.get("check_suites", {})[0].get("conclusion")
                 )
@@ -141,68 +136,3 @@ class Leaderboard:
         splitlist = re.split("-|_", name, maxsplit=2)
         session, exercise, *_ = splitlist if len(splitlist) > 1 else (splitlist, 0, 0)
         return session, exercise
-
-    # def _gen_heatmap_abs(self):
-    #     """create a version of the leaderboard with absolute values"""
-    #     df = self.dataframe
-    #     lb = (
-    #         df[["user", "session", "exercise"]]
-    #         .fillna(0)
-    #         .pivot_table(
-    #             columns="session",
-    #             values="exercise",
-    #             index="user",
-    #             aggfunc="count",
-    #             fill_value=0,
-    #             margins=True,
-    #             margins_name="Total",
-    #         )
-    #         .astype(int)
-    #         .sort_values(by="user", ascending=True)
-    #     )
-
-    #     return lb
-
-    # def _gen_heatmap_rel(self):
-    #     """Creates a version of the leaderboard with relative data"""
-    #     df = self.dataframe
-    #     lb = self.leaderboard
-
-    #     ex_count = (
-    #         df[["session", "exercise"]]
-    #         .groupby("session")
-    #         .agg("nunique")
-    #         .to_dict()["exercise"]
-    #     )
-
-    #     lb = lb[(lb["Total"] > 1) & (lb["Total"] < 150)]
-    #     lb = lb[~lb.index.isin(["numbers", "list", "cipher", "search"])]
-
-    #     rel = lb.copy(deep=True)
-    #     for session in ex_count.keys():
-    #         rel[session] = rel[session].map(
-    #             lambda i: int(100 * (i / ex_count[session]))
-    #         )
-
-    #     return rel
-
-    # def _gen_plot(self):
-    #     rel = self.relative
-
-    #     fig = px.imshow(
-    #         rel.iloc[0:, 0:14],
-    #         color_continuous_scale=px.colors.sequential.Cividis_r,
-    #         text_auto=True,
-    #     )
-    #     # sns.heatmap(rel.iloc[1:, 0:14], annot=lb.iloc[1:, 0:14], cmap="YlGnBu")
-
-    #     fig.update_layout(width=1500, height=500)
-    #     return json.dumps(fig, cls=plt.utils.PlotlyJSONEncoder)
-
-    # def to_html(self):
-    #     heatmap = self.heatmap()
-    #     return heatmap.to_html()
-
-    # def to_png(self):
-    #     heatmap = self.heatmap()
-    #     plt.savefig("leaderboard.png", dpi=400)

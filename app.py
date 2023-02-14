@@ -8,13 +8,14 @@ from datetime import datetime, timedelta
 app = Flask(__name__)
 app.config["DEBUG"] = True
 
+# Remove global variables and add functions to leaderboard class
 # user_repos = json.load(open("user_repos.json"))
 semester_data = json.load(open("dumps/semester_data.json")) # Move semester_data to an importable file
 leaderboard = Leaderboard()
 user_repos = leaderboard.user_repos
 repos = leaderboard.repos
 data = leaderboard.data
-
+times = leaderboard.times
 
 def filtered_commits(commits, lte, gte):
     ret = commits
@@ -28,7 +29,7 @@ def filtered_commits(commits, lte, gte):
 def filtered_repos(repos, lte, gte):
     return [
         repo for repo in [
-            {**item, 'commits': filtered_commits(item['commits'], lte, gte) } for item in repos 
+            {**item, 'commits': filtered_commits(item['commits'], lte, gte) } for item in repos
         ] if len(repo['commits']) > 0 # only keep the repos with at least one commit
     ]
 
@@ -41,20 +42,21 @@ def heatmap():
     else:
         start_date = request.args.get("start_date")
         end_date = request.args.get("end_date")
-    
+
     filtered_items = user_repos
 
     lte, gte = None, None
     if end_date:
-        lte = datetime.strptime(end_date, '%Y-%m-%d')    
+        lte = datetime.strptime(end_date, '%Y-%m-%d')
     if start_date:
         gte = datetime.strptime(start_date, '%Y-%m-%d')
 
     filtered_items = {key: filtered_repos(values, lte, gte) for key, values in filtered_items.items() }
     filtered_items = {key: values for key, values in filtered_items.items() if len(values) > 0 } # only keep the users with at least one commit
-    
+
     return render_template(
         "heatmap.html",
+        times = times,
         user_repos=filtered_items,
         start_date=start_date if start_date else "", # return filter data so jinja can auto fill them
         end_date=end_date if end_date else "", # return filter data so jinja can auto fill them
@@ -76,26 +78,9 @@ def heatmap_semester(semester):
 
 @app.route("/updates")
 def updates():
-    start_date = request.args.get("start_date")
-    end_date = request.args.get("end_date")
-
-    filtered_items = repos
-
-
-    lte, gte = None, None
-    if end_date:
-        lte = datetime.strptime(end_date, '%Y-%m-%d')
-    if start_date:
-        gte = datetime.strptime(start_date, '%Y-%m-%d')
-
-    filtered_items = filtered_repos(filtered_items, lte, gte)
-    
-
     return render_template(
         "list.html",
-        repos=filtered_items,
-        start_date=start_date if start_date else "", # return filter data so jinja can auto fill them
-        end_date=end_date if end_date else "", # return filter data so jinja can auto fill them
+        repos=repos,
     )
 
 
@@ -106,6 +91,11 @@ def api_data():
     request.headers.add("Access-Control-Allow-Origin", "*")
     return request
 
+@app.route("/api/v1/times")
+def api_times():
+    request = jsonify(times)
+    request.headers.add("Access-Control-Allow-Origin", "*")
+    return request
 
 @app.route("/api/v1/repos")
 def api_repos():

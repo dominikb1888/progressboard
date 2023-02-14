@@ -15,3 +15,5 @@ build/
 *.egg-info/
 
 lorri-log.txt
+
+.nvim/
