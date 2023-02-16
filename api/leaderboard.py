@@ -37,7 +37,7 @@ class Leaderboard:
     @property
     def times(self):
         return [
-            datetime.strptime(commit['commit']['author']['date'], "%Y-%m-%dT%H:%M:%SZ")
+            commit['commit']['author']['date']
             for repo in self.data for commit in repo['commits']
         ]
 

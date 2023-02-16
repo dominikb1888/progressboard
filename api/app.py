@@ -10,7 +10,7 @@ app.config["DEBUG"] = True
 
 # Remove global variables and add functions to leaderboard class
 # user_repos = json.load(open("user_repos.json"))
-semester_data = json.load(open("dumps/semester_data.json")) # Move semester_data to an importable file
+semester_data = json.load(open("_archive/dumps/semester_data.json")) # Move semester_data to an importable file
 leaderboard = Leaderboard()
 user_repos = leaderboard.user_repos
 repos = leaderboard.repos
@@ -104,11 +104,25 @@ def api_repos():
     return request
 
 
-@app.route("/api/v1/user_repos")
+@app.route("/api/v1/user_repos",  methods=["GET"])
 def api_users():
-    request = jsonify(user_repos)
-    request.headers.add("Access-Control-Allow-Origin", "*")
-    return request
+    start_date = request.args.get("start_date")
+    end_date = request.args.get("end_date")
+
+    filtered_items = user_repos
+
+    lte, gte = None, None
+    if end_date:
+        lte = datetime.strptime(end_date, '%Y-%m-%d')
+    if start_date:
+        gte = datetime.strptime(start_date, '%Y-%m-%d')
+
+    filtered_items = {key: filtered_repos(values, lte, gte) for key, values in filtered_items.items() }
+    filtered_items = {key: values for key, values in filtered_items.items() if len(values) > 0 }
+
+    response = jsonify(filtered_items)
+    response.headers.add("Access-Control-Allow-Origin", "*")
+    return response
 
 
 @app.route("/api/v1/user_repos/<string:semester>")
