@@ -9,8 +9,6 @@ import "./assets/main.css";
 import HistogramSlider from "vue3-histogram-slider";
 import "vue3-histogram-slider/dist/histogram-slider.css";
 
-import VueMultiselect from 'vue-multiselect'
-import "vue-multiselect/dist/vue-multiselect.css"
 
 const app = createApp(App);
 

@@ -1,7 +1,9 @@
 <script setup>
-  import { inject, ref, reactive } from "vue";
-  // import VueMultiselect from 'vue-multiselect'
+  import { inject, ref, reactive, toRaw } from "vue";
+  import Multiselect from '@vueform/multiselect'
+
   const axios = inject('axios');
+
   const times = await axios.get(
     'http://127.0.0.1:5000/api/v1/times'
   ).then(
@@ -17,9 +19,13 @@
             });
           }
 
+  const all_repos = await get_repos()
+
   const state = reactive({
     user_repos: await get_repos(),
-    users: Object.keys(await get_repos())
+    users: await get_users(),
+    selected_users: null,
+    selected_dates: null
   })
 
   async function get_repos(date_min, date_max) {
@@ -39,25 +45,43 @@
       response => {
         return response.data
       })
-
   return data
   }
 
-async function get_filtered(values) {
-    console.log(values)
+ async function get_users() {
+  const data = await axios.get('http://127.0.0.1:5000/api/v1/users').then(
+      response => {
+        return response.data
+      })
+  return data
+  }
+
+
+
+async function get_date_filtered(values) {
     if (!values) {
       state.user_repos = await get_repos()
-      state.users =  await Object.keys(state.user_repos)
+      state.users =  await Object.keys(all_repos)
     } else {
       const value_min = new Date(values.from)
-      const value_max = new Date (values.to)
+      const value_max = new Date(values.to)
       state.user_repos = await get_repos(value_min, value_max)
       state.users = await Object.keys(state.user_repos)
     }
   }
-  </script>
 
-  <template>
+async function get_user_filtered() {
+    let repos = new Object()
+    let selected_users = toRaw(state.selected_users)
+    for (var i =0; i < selected_users.length; i++) {
+      let user = selected_users[i]
+      repos[user] = all_repos[user]
+    }
+    state.user_repos = repos
+}
+</script>
+
+<template>
     <main>
       <HistogramSlider
       :width="1280"
@@ -66,56 +90,79 @@ async function get_filtered(values) {
       :prettify="prettify"
       :drag-interval="true"
       :force-edges="false"
-      @finish="get_filtered"
+      @finish="get_date_filtered"
     />
-
-<div id="title-bar">
-  <h1>ProgressBoard</h1>
-  <!-- <VueMultiselect -->
-  <!--     :value="value" -->
-  <!--     :options="state.users" -->
-  <!--     :multiple="true" -->
-  <!--     :close-on-select="true" -->
-  <!--     placeholder='Filter for users' -->
-  <!--     label='filter-users' -->
-  <!--     track-by='filter-users' -->
-  <!--     > -->
-  <!-- </VueMultiselect> -->
-</div>
-    <div id="table-wrapper">
-<table id="man-heatmap">
-  <tr class='header'>
-    <th class='color title'></th>
-    <th v-for="session in 15" :key="session" class='color session'><a href='#'>{{session}}</a></th>
-  </tr>
-  <tr v-for="(repos, user) in state.user_repos">
-    <th class='color name'>
-            <a :href="repos[0]['user_url']">
-              <img :src="repos[0]['avatar']" :alt="user">
-            </a>
-            <a :href="repos[0]['user_url']">
-              {{user}}
-            </a>
-    </th>
-    <td v-for="session in 15" :key="session">
-            <ul class='color'>
-              <template v-for="repo in repos">
-              <li v-if="repo['session'] == session" :key="session">
-                <a :href="repo['latest_commit_url']">
-                <button :class="[repo.status]" type="button" :title="[repo.name]">
-                  {{ repo.exercise }}
-                </button>
-                </a>
-              </li>
-              </template>
-            </ul>
-        </td>
-      </tr>
-    </table>
-    </div>
-</main>
+  <div id="title-bar">
+    <h1>ProgressBoard</h1>
+    <Multiselect
+        v-model="state.selected_users"
+        mode="tags"
+        placeholder="Select Users"
+        valueProp="login"
+        track-by="login"
+        label="login"
+        :close-on-select="false"
+        :searchable="true"
+        :options="state.users"
+        @select="get_user_filtered"
+        @deselect="get_user_filtered"
+    >
+        <template v-slot:tag="{ option, handleTagRemove, disabled }">
+        <div
+          class="multiselect-tag is-user"
+          :class="{
+            'is-disabled': disabled
+          }"
+        >
+          <img height="20" :src="option.avatar_url">
+          {{ option.login }}
+          <span
+            v-if="!disabled"
+            class="multiselect-tag-remove"
+            @click="handleTagRemove(option, $event)"
+          >
+            <span class="multiselect-tag-remove-icon"></span>
+          </span>
+        </div>
+      </template>
+      </Multiselect>
+  </div>
+      <div id="table-wrapper">
+  <table id="man-heatmap">
+    <tr class='header'>
+      <th class='color title'></th>
+      <th v-for="session in 15" :key="session" class='color session'><a href='#'>{{session}}</a></th>
+    </tr>
+    <tr v-for="(repos, user) in state.user_repos">
+      <th class='color name'>
+              <a :href="repos[0]['user_url']">
+                <img :src="repos[0]['avatar']" :alt="user">
+              </a>
+              <a :href="repos[0]['user_url']">
+                {{user}}
+              </a>
+      </th>
+      <td v-for="session in 15" :key="session">
+              <ul class='color'>
+                <template v-for="repo in repos">
+                <li v-if="repo['session'] == session" :key="session">
+                  <a :href="repo['latest_commit_url']">
+                  <button :class="[repo.status]" type="button" :title="[repo.name]">
+                    {{ repo.exercise }}
+                  </button>
+                  </a>
+                </li>
+                </template>
+              </ul>
+          </td>
+        </tr>
+      </table>
+      </div>
+  </main>
 </template>
-<style src="vue-multiselect/dist/vue-multiselect.css"></style>
+
+<style src="@vueform/multiselect/themes/default.css"></style>
+
 <style>
     div#title-bar {
       background-color: #0091ff;
@@ -193,13 +240,20 @@ async function get_filtered(values) {
       padding: .8em 2em 2em .5em;
     }
 
+    table#man-heatmap > tr > td:nth-child(7) {
+      background-color: #0091ff !important;
+      border-style: solid;
+    }
+
     table#man-heatmap td ul {
       border-radius: 5%;
       padding: 0;
       display: grid;
       grid-template-columns: 1fr 1fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr 1fr 1fr;
       grid-gap: 3% 5%;
       list-style-type: none;
+      grid-auto-flow: column;
     }
 
     table#man-heatmap button {
@@ -219,4 +273,31 @@ async function get_filtered(values) {
       height: 93%;
       /* font-weight: bold; */
     }
+
+  .multiselect-tag.is-user {
+    padding: 5px 8px;
+    border-radius: 22px;
+    background: #35495e;
+    margin: 3px 3px 8px;
+  }
+
+  .multiselect-tag.is-user img {
+    width: 18px;
+    border-radius: 50%;
+    height: 18px;
+    margin-right: 8px;
+    border: 2px solid #ffffffbf;
+  }
+
+  .multiselect-tag.is-user i:before {
+    color: #ffffff;
+    border-radius: 50%;;
+  }
+
+  .user-image {
+    margin: 0 6px 0 0;
+    border-radius: 50%;
+    height: 22px;
+  }
+
 </style>
