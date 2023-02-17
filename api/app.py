@@ -1,6 +1,7 @@
 from flask import Flask, request, json, abort, jsonify, render_template
 from leaderboard import Leaderboard
 from collections import defaultdict
+from copy import deepcopy
 import requests as rq
 import json
 from datetime import datetime, timedelta
@@ -48,9 +49,30 @@ def api_repos():
     request.headers.add("Access-Control-Allow-Origin", "*")
     return request
 
+@app.route("/api/v1/semester_users")
+def api_semester_users():
+    sem_data = deepcopy(semester_data)
+    for course in sem_data:
+        student_dict = {}
+        for student in course['students']:
+            for student_data in leaderboard.users:
+                if student.get('github_username','') == student_data['login']:
+                    student_dict[student_data['login']] = student_data
+        course['students'] = student_dict
+
+    request = jsonify(sem_data)
+    request.headers.add("Access-Control-Allow-Origin", "*")
+    return request
+
 @app.route("/api/v1/users")
 def api_users():
     request = jsonify(leaderboard.users)
+    request.headers.add("Access-Control-Allow-Origin", "*")
+    return request
+
+@app.route("/api/v1/semester_data")
+def api_semester_data():
+    request = jsonify(semester_data)
     request.headers.add("Access-Control-Allow-Origin", "*")
     return request
 
@@ -63,7 +85,7 @@ def api_semesters():
 
 @app.route("/api/v1/courses")
 def api_courses():
-    semesters = [course['name'] for course in semester_data]
+    semesters = [course['course'] for course in semester_data]
     request = jsonify(semesters)
     request.headers.add("Access-Control-Allow-Origin", "*")
     return request
