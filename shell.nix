@@ -68,6 +68,8 @@ let
 in pkgs.mkShell {
   buildInputs = with pkgs; [
     pythonEnv
+    nodejs
+    nodePackages.npm
     redis
     rdbtools
   ];
