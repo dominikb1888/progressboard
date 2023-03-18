@@ -17,3 +17,8 @@ build/
 lorri-log.txt
 
 .nvim/
+
+# Devenv
+.devenv*
+devenv.local.nix
+
