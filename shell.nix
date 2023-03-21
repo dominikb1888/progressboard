@@ -4,7 +4,6 @@ let
   pythonEnv = with pkgs.python310Packages; [
     ipython
     jupyter
-    jupyterlab
     matplotlib
     pandas
     plotly
