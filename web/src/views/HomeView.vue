@@ -21,8 +21,24 @@
 
   const all_repos = await get_repos()
 
+  function flatten_repos(user_repos) {
+    let flat_repos = []
+    for (const user in user_repos) {
+      for (const repo of user_repos[user]) {
+        flat_repos.push(repo)
+      }
+    }
+  console.log(flat_repos)
+    flat_repos = flat_repos.sort((a,b) => {
+        return new Date(b['commits'][0]['commit']['author']['date']) - new Date(a['commits'][0]['commit']['author']['date']); // descending
+    })
+
+    return flat_repos
+  }
+
   const state = reactive({
     user_repos: await get_repos(),
+    repos: flatten_repos(all_repos),
     users: await get_users(),
     selected_users: null,
     selected_dates: null
@@ -61,11 +77,13 @@
 async function get_date_filtered(values) {
     if (!values) {
       state.user_repos = await get_repos()
+      state.repos = flatten_repos(state.user_repos)
       state.users =  await Object.keys(all_repos)
     } else {
       const value_min = new Date(values.from)
       const value_max = new Date(values.to)
       state.user_repos = await get_repos(value_min, value_max)
+      state.repos = flatten_repos(state.user_repos)
       state.users = await Object.keys(state.user_repos)
     }
   }
@@ -92,6 +110,20 @@ async function get_user_filtered() {
       :force-edges="false"
       @finish="get_date_filtered"
     />
+
+    <div id="updateWrapper">
+      <ul>
+        <li v-for="repo in state.repos">
+            <a :href="repo['latest_commit_url']">
+              <button :class="[repo.status]" type="button" :title="[repo.name.split('-').splice(2,5).join(' ')]">
+                <img :src="repo['avatar']" :alt="[repo.name]" :class="[repo.status]">
+              </button>
+            </a>
+        </li>
+      </ul>
+    </div>
+
+
   <div id="title-bar">
     <h1>ProgressBoard</h1>
     <Multiselect
@@ -127,7 +159,8 @@ async function get_user_filtered() {
       </template>
       </Multiselect>
   </div>
-      <div id="table-wrapper">
+
+  <div id="table-wrapper">
   <table id="man-heatmap">
     <tr class='header'>
       <th class='color title'></th>
@@ -299,5 +332,41 @@ async function get_user_filtered() {
     border-radius: 50%;
     height: 22px;
   }
+
+    #updateWrapper ul {
+      padding: 0;
+      margin: 2em 0;
+      height: 245px;
+      overflow: auto;
+    }
+
+  #updateWrapper ul li  {
+    float: left;
+    list-style: none;
+    padding: 0;
+
+    }
+
+  #updateWrapper ul li button {
+    margin: 0 1em 1em 0;
+    border-width: 3px;
+    width: 50px;
+    height: 50px;
+    border-radius: 1em;
+    overflow: hidden;
+    }
+
+  #updateWrapper button img {
+      position: relative;
+      left: -10px;
+      top: -5px;
+      width: 50px;
+    }
+
+    div#updateWrapper button.completed { border-color: #BEE5B0; color: #fff; }
+    div#updateWrapper button.failing { border-color: #FB6962; color: #fff; }
+    div#updateWrapper button.not-started { color: #AEAEAE; border-color: #fff; }
+    div#updateWrapper button.rework { color: #AEAEAE; border-color:  #FCFC99; }
+
 
 </style>
