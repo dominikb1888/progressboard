@@ -35,7 +35,7 @@ class GithubAPI:
             match_headers=True,
             stale_if_error=True,  # In case of request errors, use stale cache data if possi
             stale_while_revalidate=True,
-            #urls_expire_after=urls_expire_after,
+            urls_expire_after=urls_expire_after,
         )
 
         self.session.auth = self.auth
