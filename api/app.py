@@ -135,7 +135,7 @@ def gh_webhook():
         case 'commit_comment':
             print(f"New Comment on {data['repository']['name']}", file=sys.stderr)
         case _:
-            print("New event: {event}", file=sys.stderr)
+            print(f"New event: {event}", file=sys.stderr)
 
     return 'OK'
 
