@@ -22,3 +22,4 @@ lorri-log.txt
 .devenv*
 devenv.local.nix
 
+ngrok_pboard.yml

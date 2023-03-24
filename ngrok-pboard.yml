@@ -1,0 +1,12 @@
+region: us
+version: "2"
+authtoken: 1pWlys7JmK8522PjLchX58cw4Nu_5ycCaJZj7cFEt7USVVHpv
+
+tunnels:
+    flask:
+      proto: http
+      addr: 5000
+
+    vue:
+      proto: http
+      addr: 5173

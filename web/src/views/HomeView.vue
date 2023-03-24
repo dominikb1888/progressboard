@@ -4,13 +4,6 @@
 
   const axios = inject('axios');
 
-  const times = await axios.get(
-    'http://127.0.0.1:5000/api/v1/times'
-  ).then(
-      response => {
-        return response.data.map(d => new Date(d))
-      })
-
   const prettify = function(ts) {
       return new Date(ts).toLocaleDateString("en", {
              year: "numeric",
@@ -44,12 +37,14 @@
     selected_dates: null
   })
 
-  async function get_repos(date_min, date_max) {
+
+   async function get_repos(date_min, date_max) {
     if (date_min == undefined) {
-      date_min = new Date(Math.min.apply(null, times));
+      // date_min = new Date(Math.min.apply(null, times));
+      date_min = new Date("2023-03-19T09:44:50Z")
     }
     if (date_max == undefined) {
-      date_max = new Date(Math.max.apply(null, times));
+      date_max = new Date();
     }
 
     const data = await axios.get('http://127.0.0.1:5000/api/v1/user_repos', {
@@ -71,6 +66,18 @@
       })
   return data
   }
+
+function get_times(repos) {
+    const times = []
+    for (const repo of repos) {
+      for (const commit of repo['commits']) {
+        times.push(new Date(commit['commit']['author']['date']))
+      }
+    }
+   return times
+  }
+
+  const times = get_times(flatten_repos(all_repos))
 
 
 
@@ -114,11 +121,16 @@ async function get_user_filtered() {
     <div id="updateWrapper">
       <ul>
         <li v-for="repo in state.repos">
-            <a :href="repo['latest_commit_url']">
+          <span v-if="repo.status != 'not-started'">
+            <a :href="repo['latest_commit_url']" target="_blank" rel="noopener noreferrer">
               <button :class="[repo.status]" type="button" :title="[repo.name.split('-').splice(2,5).join(' ')]">
                 <img :src="repo['avatar']" :alt="[repo.name]" :class="[repo.status]">
               </button>
             </a>
+            <span v-if="repo['commits'][0]['commit']['comment_count'] < 1">
+              <span class="red_dot">■</span>
+            </span>
+          </span>
         </li>
       </ul>
     </div>
@@ -334,10 +346,10 @@ async function get_user_filtered() {
   }
 
     #updateWrapper ul {
-      padding: 0;
-      margin: 2em 0;
-      height: 245px;
-      overflow: auto;
+      padding: 1em 0;
+      margin: 1em 0 2em 0;
+      height: 135px;
+      overflow: scroll;
     }
 
   #updateWrapper ul li  {
@@ -363,6 +375,15 @@ async function get_user_filtered() {
       width: 50px;
     }
 
+  #updateWrapper span.red_dot {
+    font-size: 18px;
+    color: #FB6962;
+    position: absolute;
+    left: -24px;
+    top: -48px;
+    z-index: 50;
+    }
+
     div#updateWrapper button.completed { border-color: #BEE5B0; color: #fff; }
     div#updateWrapper button.failing { border-color: #FB6962; color: #fff; }
     div#updateWrapper button.not-started { color: #AEAEAE; border-color: #fff; }
@@ -370,3 +391,4 @@ async function get_user_filtered() {
 
 
 </style>
+

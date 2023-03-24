@@ -4,6 +4,7 @@ from collections import defaultdict
 from copy import deepcopy
 import requests as rq
 import json
+import sys
 from datetime import datetime, timedelta
 
 app = Flask(__name__)
@@ -123,18 +124,20 @@ def api_repos_user(user_name):
 
 
 
-# @app.route('/github_push', methods=['POST'])
-# def github_push():
-#     data = request.json
-#     header = request.headers.get("X-GitHub-Event")
-#     match header:
-#         case'push':
-#             pass
-#         case 'commit_comment':
-#             pass
-#         case _:
-#             pass
-#
+@app.route('/gh_webhook', methods=['POST'])
+def gh_webhook():
+    data = request.json
+    event = request.headers.get("X-GitHub-Event")
+    match event:
+        case 'push':
+            leaderboard.gh.get_repo_resource('DB-Teaching', data['repository']['name'], 'repo')
+            print(f"New Commit on {data['repository']['name']}", file=sys.stderr)
+        case 'commit_comment':
+            print(f"New Comment on {data['repository']['name']}", file=sys.stderr)
+        case _:
+            print("New event: {event}", file=sys.stderr)
+
+    return 'OK'
 
 
 if __name__ == "__main__":
