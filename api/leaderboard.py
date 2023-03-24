@@ -49,7 +49,7 @@ class Leaderboard:
                 continue
 
             session, exercise = self._split_repo_name(repo.get("name"))
-            commits = self.gh.get_repo_resource(self.org, repo.get("name"), "commits")
+            commits = self.filter_bot_commits(self.gh.get_repo_resource(self.org, repo.get("name"), "commits"))
             user_name, user_avatar, user_link = (None, None, None)
             commit_url, comment_count = self.get_latest_commit(commits)
 
