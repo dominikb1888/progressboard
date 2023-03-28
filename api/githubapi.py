@@ -18,7 +18,7 @@ class GithubAPI:
     ):
         self.user = user
         self.auth = HTTPBasicAuth(self.user, key)
-        base_url = endpoint + '/orgs/DB-Teaching'
+        base_url = endpoint + '/orgs/DB-Student-Repos'
         urls_expire_after = {
             base_url + '/repos': DO_NOT_CACHE,
             base_url + '/outside_collaborators': DO_NOT_CACHE,

@@ -13,7 +13,7 @@ class Leaderboard:
         user=os.environ.get("GHUSER", "dominikb1888"), # use environment to change the user
         key=os.environ.get("GHTOKEN"),
         endpoint="https://api.github.com",
-        org=os.environ.get("GHORG", "DB-Teaching"), # use environment to change the organization
+        org=os.environ.get("GHORG", "DB-Student-Repos"), # use environment to change the organization
     ):
         self.gh = GithubAPI(user, key, endpoint)
         self.org = org
