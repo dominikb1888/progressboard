@@ -5,13 +5,15 @@ from copy import deepcopy
 import requests as rq
 import json
 import sys
+from githubapi import GithubAPI
 from datetime import datetime, timedelta
+from requests import Request
 
 app = Flask(__name__)
 app.config["DEBUG"] = True
 
-semester_data = json.load(open("semester_data.json")) # Move semester_data to an importable file
 leaderboard = Leaderboard()
+semester_data = json.load(open("semester_data.json")) # Move semester_data to an importable file
 
 def filtered_commits(commits, lte, gte):
     ret = commits
@@ -29,6 +31,17 @@ def filtered_repos(repos, lte, gte):
         ] if len(repo['commits']) > 0 # only keep the repos with at least one commit
     ]
 
+@app.route("/update")
+def update():
+    leaderboard = Leaderboard()
+    return 'OK'
+
+@app.route("/cache")
+def cache():
+    gh = GithubAPI()
+    result = []
+    cache =  {response.url: response.json() for response in gh.session.cache.responses.values()}
+    return str(cache)
 
 @app.route("/api/v1/data")
 def api_data():

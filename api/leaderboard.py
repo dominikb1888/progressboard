@@ -49,7 +49,7 @@ class Leaderboard:
                 continue
 
             session, exercise = self._split_repo_name(repo.get("name"))
-            commits = self.filter_bot_commits(self.gh.get_repo_resource(self.org, repo.get("name"), "commits"))
+            commits = self.gh.get_repo_resource(self.org, repo.get("name"), "commits")
             user_name, user_avatar, user_link = (None, None, None)
             commit_url, comment_count = self.get_latest_commit(commits)
 
@@ -67,7 +67,7 @@ class Leaderboard:
                     "commits": len(commits),
                     "exercise": exercise,
                     "latest_commit_comment_count": comment_count,
-                    "latest_commit_url": commit_url,
+                    "latest_commit_url": commit_url if commit_url else repo['html_url'],
                     "name": repo.get("name"),
                     "session": session,
                     "status": self.get_status(commits, repo),
@@ -89,8 +89,9 @@ class Leaderboard:
     def get_latest_commit(self, commits):
         ordered_commits = sorted(self.filter_bot_commits(commits), key=lambda d: d['commit']['author']['date'])
         if len(ordered_commits) > 0:
+            url = ordered_commits[-1]['html_url']
             comment_count = ordered_commits[-1].get("comment_count", False)
-            return ordered_commits[-1]["html_url"], comment_count
+            return url, comment_count
         else:
             return False, False
 

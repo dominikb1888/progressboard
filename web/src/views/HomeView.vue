@@ -41,7 +41,7 @@
    async function get_repos(date_min, date_max) {
     if (date_min == undefined) {
       // date_min = new Date(Math.min.apply(null, times));
-      date_min = new Date("2023-03-19T09:44:50Z")
+      date_min = new Date("2022-03-19T09:44:50Z")
     }
     if (date_max == undefined) {
       date_max = new Date();

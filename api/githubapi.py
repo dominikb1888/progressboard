@@ -4,7 +4,9 @@ from requests_cache import DO_NOT_CACHE
 from dotenv import load_dotenv
 from urllib.parse import urlparse, parse_qs
 from datetime import timedelta
+import sys
 import os
+import time
 
 load_dotenv()
 
@@ -35,7 +37,7 @@ class GithubAPI:
             match_headers=True,
             stale_if_error=True,  # In case of request errors, use stale cache data if possi
             stale_while_revalidate=True,
-            urls_expire_after=urls_expire_after,
+            # urls_expire_after=urls_expire_after,
         )
 
         self.session.auth = self.auth
@@ -48,6 +50,16 @@ class GithubAPI:
     def _get(self, type="", resource="", query=""):
         url = f"{self.endpoint}/{type}/{resource}"
         response = self.session.get(url)
+        remaining_requests = int(response.headers['X-RateLimit-Remaining'])
+
+        # Wait if rate limit exceeded
+        if remaining_requests == 0:
+            reset_time = int(response.headers['X-RateLimit-Reset'])
+            wait_time = (reset_time - time.time()) + 10
+            if wait_time > 0:
+                print(f"Rate Limit Exceded - wait {int(wait_time/60)} min", file=sys.stderr)
+                time.sleep(wait_time)
+
         # if not self._rate_limit_exceeded(response.headers):
         print(response.url, response.from_cache)
         pages = [response.json()]
