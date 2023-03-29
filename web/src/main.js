@@ -9,6 +9,7 @@ import "./assets/main.css";
 import HistogramSlider from "vue3-histogram-slider";
 import "vue3-histogram-slider/dist/histogram-slider.css";
 
+import ganttastic from '@infectoone/vue-ganttastic'
 
 const app = createApp(App);
 
@@ -21,5 +22,6 @@ app.use(VueAxios, axios);
 app.provide('axios', app.config.globalProperties.axios)
 
 app.use(router);
+app.use(ganttastic);
 
 app.mount("#app");

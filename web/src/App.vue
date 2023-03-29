@@ -2,13 +2,14 @@
 import { RouterLink, RouterView } from "vue-router";
 </script>
 <template>
-  <!-- <header> -->
-  <!--   <div class="wrapper"> -->
-  <!--     <nav> -->
-  <!--       <RouterLink to="/">Home</RouterLink> -->
-  <!--     </nav> -->
-  <!--   </div> -->
-  <!-- </header> -->
+  <header>
+    <div class="wrapper">
+      <nav>
+        <RouterLink to="/">Home</RouterLink>
+        <RouterLink to="/timeline"> Timeline</RouterLink>
+      </nav>
+    </div>
+  </header>
 
   <Suspense>
   <RouterView />
