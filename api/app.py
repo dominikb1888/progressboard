@@ -13,7 +13,7 @@ app = Flask(__name__)
 app.config["DEBUG"] = True
 
 leaderboard = Leaderboard()
-semester_data = json.load(open("semester_data.json")) # Move semester_data to an importable file
+semester_data = json.load(open("static/semester_data.json")) # Move semester_data to an importable file
 
 def filtered_commits(commits, lte, gte):
     ret = commits
