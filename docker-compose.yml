@@ -1,0 +1,48 @@
+version: '3'
+
+services:
+  redis:
+    image: redis:latest
+    container_name: redis
+    volumes:
+      - ./redisdata:/data
+    ports:
+      - "6380:6380"
+    # environment:
+    #   REDIS_HOST: <your_azure_redis_cache_host>
+    #   REDIS_PASSWORD: <your_azure_redis_cache_password>
+    # command: >
+    #   bash -c "redis-cli -h <your_azure_redis_cache_host> -a <your_azure_redis_cache_password>
+    #   BGSAVE && CONFIG GET dir && cp <path_to_local_rdb_file> $(redis-cli -h <your_azure_redis_cache_host> -a <your_azure_redis_cache_password>
+    #   CONFIG GET dir | awk '{print $2}')/<new_file_name.rdb> &&
+    #   CONFIG SET dbfilename <new_file_name.rdb> &&
+    #   CONFIG REWRITE &&
+    #   BGREWRITEAOF &&
+    #   redis-server /usr/local/etc/redis/redis.conf"
+
+  flask:
+    env_file:
+      - .env
+    build:
+      context: ./api
+    container_name: flask
+    restart: always
+    depends_on:
+      - redis
+    ports:
+      - "5000:5000"
+
+  vue:
+    build:
+      context: ./web
+    container_name: vue
+    restart: always
+    depends_on:
+      - flask
+    ports:
+      - "8080:8080"
+
+
+networks:
+  local-dev:
+    external: true

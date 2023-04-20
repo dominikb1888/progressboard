@@ -26,7 +26,7 @@ class GithubAPI:
             base_url + '/outside_collaborators': DO_NOT_CACHE,
             '*': 60,
         }
-        backend = RedisCache(host='127.0.0.1', port=6379)
+        backend = RedisCache(host='localhost', port=6379)
         self.session = CachedSession(
             "leaderboard",
             backend = backend,
