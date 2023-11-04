@@ -1,4 +1,5 @@
-from flask import Flask, request, json, abort, jsonify, render_template
+from flask import Flask, request, Response, json, abort, jsonify, render_template
+from flask_cors import CORS
 from leaderboard import Leaderboard
 from collections import defaultdict
 from copy import deepcopy
@@ -10,6 +11,7 @@ from datetime import datetime, timedelta
 from requests import Request
 
 app = Flask(__name__)
+CORS(app)
 app.config["DEBUG"] = True
 
 leaderboard = Leaderboard()
@@ -30,6 +32,19 @@ def filtered_repos(repos, lte, gte):
             {**item, 'commits': filtered_commits(item['commits'], lte, gte) } for item in repos
         ] if len(repo['commits']) > 0 # only keep the repos with at least one commit
     ]
+
+@app.before_request
+def handle_preflight():
+    if request.method == "OPTIONS":
+       res = Response()
+       res.headers['X-Content-Type-Options'] = '*'
+       return res
+
+
+
+@app.route("/")
+def index():
+    return render_template("index.html", data=leaderboard.data)
 
 @app.route("/update")
 def update():
@@ -119,8 +134,13 @@ def api_repos_all():
     filtered_items = {key: filtered_repos(values, lte, gte) for key, values in filtered_items.items() }
     filtered_items = {key: values for key, values in filtered_items.items() if len(values) > 0 }
 
+
+
     response = jsonify(filtered_items)
     response.headers.add("Access-Control-Allow-Origin", "*")
+    response.headers.add("Access-Control-Allow-Headers", "Content-Type, hx-current-url, hx-request")
+    response.headers.add("Access-Control-Allow-Methods", "GET")
+    response.headers.add("Access-Control-Max-Age", "86400")
     return response
 
 

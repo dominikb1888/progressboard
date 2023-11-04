@@ -7,7 +7,7 @@ services:
     volumes:
       - ./redisdata:/data
     ports:
-      - "6380:6380"
+      - "6379:6379"
     # environment:
     #   REDIS_HOST: <your_azure_redis_cache_host>
     #   REDIS_PASSWORD: <your_azure_redis_cache_password>
