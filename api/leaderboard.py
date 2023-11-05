@@ -1,5 +1,4 @@
 from collections import defaultdict
-from datetime import datetime
 import os
 import re
 from dotenv import load_dotenv
@@ -64,7 +63,6 @@ class Leaderboard:
             df.append(
                 {
                     "avatar": user_avatar,
-                    "commits": len(commits),
                     "exercise": exercise,
                     "latest_commit_comment_count": comment_count,
                     "latest_commit_url": commit_url if commit_url else repo['html_url'],
