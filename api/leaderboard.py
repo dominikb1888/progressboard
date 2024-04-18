@@ -97,10 +97,11 @@ class Leaderboard:
     def get_status(self, commits, repo):
         """Returns the status of a repo based on workflow runs"""
         conclusions = []
-        for commit in self.filter_bot_commits(commits):
-            check_suite = self.gh.get_repo_commit_status(
-                    self.org, repo.get("name"), commit.get("sha"), "check-suites"
+        shas = [commit['sha'] for commit in commits]
+        check_suites = self.gh.get_multiple_commit_statuses(
+                    self.org, repo.get("name"), shas, "check-suites"
                 )
+        for check_suite in check_suites:
             if isinstance(check_suite, dict) and check_suite.get("total_count", 0) > 0:
                 conclusions.append(
                     check_suite.get("check_suites", {})[0].get("conclusion")

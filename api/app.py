@@ -1,14 +1,13 @@
-from flask import Flask, request, Response, json, abort, jsonify, render_template
-from flask_cors import CORS
-from leaderboard import Leaderboard
-from collections import defaultdict
 from copy import deepcopy
-import requests as rq
 import json
 import sys
-from githubapi import GithubAPI
 from datetime import datetime, timedelta
-from requests import Request
+
+from flask import Flask, request, Response, json, abort, jsonify, render_template
+from flask_cors import CORS
+
+from leaderboard import Leaderboard
+from githubapi import GithubAPI
 
 app = Flask(__name__)
 CORS(app)
@@ -25,7 +24,6 @@ def filtered_commits(commits, lte, gte):
         ret = [commit for commit in ret if gte <= datetime.strptime(commit['commit']['author']['date'], "%Y-%m-%dT%H:%M:%SZ")] # filter all the commits that are before gte
     return ret
 
-
 def filtered_repos(repos, lte, gte):
     return [
         repo for repo in [
@@ -36,11 +34,9 @@ def filtered_repos(repos, lte, gte):
 @app.before_request
 def handle_preflight():
     if request.method == "OPTIONS":
-       res = Response()
-       res.headers['X-Content-Type-Options'] = '*'
-       return res
-
-
+        res = Response()
+        res.headers['X-Content-Type-Options'] = '*'
+        return res
 
 @app.route("/")
 def index():

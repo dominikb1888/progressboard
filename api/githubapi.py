@@ -7,6 +7,7 @@ from datetime import timedelta
 import sys
 import os
 import time
+from concurrent.futures import ThreadPoolExecutor
 
 load_dotenv()
 
@@ -26,7 +27,7 @@ class GithubAPI:
             base_url + '/outside_collaborators': DO_NOT_CACHE,
             '*': 60,
         }
-        backend = RedisCache(host='localhost', port=6379)
+        backend = RedisCache(host='redis', port=6379) # Hardcoded hostname for use with docker compose
         self.session = CachedSession(
             "leaderboard",
             backend = backend,
@@ -49,6 +50,11 @@ class GithubAPI:
 
     def _get(self, type="", resource="", query=""):
         url = f"{self.endpoint}/{type}/{resource}"
+
+        def fetch_page(page_number):
+            response = self.session.get(f"{url}?page={page_number}&per_page=100&direction=desc")
+            return response.json()
+
         response = self.session.get(url)
         remaining_requests = int(response.headers['X-RateLimit-Remaining'])
 
@@ -57,20 +63,22 @@ class GithubAPI:
             reset_time = int(response.headers['X-RateLimit-Reset'])
             wait_time = (reset_time - time.time()) + 10
             if wait_time > 0:
-                print(f"Rate Limit Exceded - wait {int(wait_time/60)} min", file=sys.stderr)
+                print(f"Rate Limit Exceeded - wait {int(wait_time/60)} min", file=sys.stderr)
                 time.sleep(wait_time)
 
-        # if not self._rate_limit_exceeded(response.headers):
         print(response.url, response.from_cache)
         pages = [response.json()]
+
         if response.links.get("last"):
             last_url = response.links.get("last", {}).get("url")
             query_dict = parse_qs(urlparse(last_url).query)
             params = {k: v[0] for k, v in query_dict.items()}
-            for i in range(2, int(params.get("page")) + 1):
-                response = self.session.get(f"{url}?page={i}")
-                print(response.url, response.from_cache)
-                pages.append(response.json())
+            total_pages = int(params.get("page"))
+
+            # Fetch other pages in parallel
+            with ThreadPoolExecutor() as executor:
+                page_numbers = range(2, total_pages + 1)
+                pages += list(executor.map(fetch_page, page_numbers))
 
         return self._flatten_results(pages, resource)
 
@@ -94,3 +102,13 @@ class GithubAPI:
 
     def get_repo_commit_file(self, org, repo, file, ref):
         return self._get(f"repos/{org}/{repo}/contents/{file}", query=ref)
+
+    def get_multiple_commit_statuses(self, org, repo, refs, resource):
+        with ThreadPoolExecutor() as executor:
+            results = list(executor.map(self.get_repo_commit_status, [org] * len(refs), [repo] * len(refs), refs, [resource] * len(refs)))
+        return results
+
+    def get_multiple_commit_files(self, org, repo, files, refs):
+        with ThreadPoolExecutor() as executor:
+            results = list(executor.map(self.get_repo_commit_file, [org] * len(files), [repo] * len(files), files, refs))
+        return results
